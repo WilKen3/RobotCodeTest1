@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;**/
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 /**import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; **/
@@ -68,12 +67,12 @@ XboxController driveController;
     
     double forwardSpeed =driveController.getLeftY();
     double rotationSpeed = driveController.getRightX();
-    drive.arcadeDrive(-forwardSpeed,-rotationSpeed);
-    if(intakeMotorInputL>0.02 && intakeMotorInputR>0.02){
+    drive.arcadeDrive(-forwardSpeed,rotationSpeed);
+    if(intakeMotorInputL>0.03 && intakeMotorInputR>0.03){
       intakeMotor.set(ControlMode.PercentOutput,intakeMotorInputL);
-    } else if(intakeMotorInputL>0.02 && intakeMotorInputR<0.02){
+    } else if(intakeMotorInputL>0.03 && intakeMotorInputR<0.03){
       intakeMotor.set(ControlMode.PercentOutput,intakeMotorInputL);
-    } else if(intakeMotorInputL<0.02 && intakeMotorInputR>0.02){
+    } else if(intakeMotorInputL<0.03 && intakeMotorInputR>0.03){
       intakeMotor.set(ControlMode.PercentOutput,intakeMotorInputR);
     } else{
       intakeMotor.set(ControlMode.PercentOutput,0);
