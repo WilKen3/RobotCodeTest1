@@ -73,7 +73,7 @@ XboxController driveController;
     } else if(intakeMotorInputL>0.03 && intakeMotorInputR<0.03){
       intakeMotor.set(ControlMode.PercentOutput,intakeMotorInputL);
     } else if(intakeMotorInputL<0.03 && intakeMotorInputR>0.03){
-      intakeMotor.set(ControlMode.PercentOutput,intakeMotorInputR);
+      intakeMotor.set(ControlMode.PercentOutput,-intakeMotorInputR);
     } else{
       intakeMotor.set(ControlMode.PercentOutput,0);
     }
