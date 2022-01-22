@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;**/
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 /**import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; **/
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -14,6 +15,7 @@ public class Robot extends TimedRobot {
 WPI_TalonSRX dRF, dLF;
 VictorSPX dRB, dLB; 
 DifferentialDrive drive;
+XboxController driveController;
 
   
   
@@ -27,8 +29,7 @@ DifferentialDrive drive;
     dRF.setInverted(true);
     dRB.setInverted(true);
     dRB.follow(dRF);
-
-
+    driveController = new XboxController(0);
     drive = new DifferentialDrive(dLF, dRF);
   }
   @Override
@@ -42,14 +43,6 @@ DifferentialDrive drive;
   }
   @Override
   public void autonomousPeriodic() {
-    
-  }
-  @Override
-  public void teleopInit() {}
-  int i =0;
-  int k =0;
-  @Override
-  public void teleopPeriodic() {
     i = i++ % 250;
     
     if(i < 150) { 
@@ -57,7 +50,19 @@ DifferentialDrive drive;
     } else if(i < 250){
      drive.arcadeDrive(-0.5,0.0);
     }
+  }
+  @Override
+  public void teleopInit() {}
+  int i =0;
+  int k =0;
+ 
 
+
+  @Override
+  public void teleopPeriodic() {
+    double forwardSpeed =driveController.getLeftY();
+    double rotationSpeed = driveController.getRightX();
+    drive.arcadeDrive(forwardSpeed,rotationSpeed);
     }
   @Override
   public void disabledInit() {}
