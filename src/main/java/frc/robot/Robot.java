@@ -63,11 +63,23 @@ XboxController driveController;
 
   @Override
   public void teleopPeriodic() {
-    double intakeMotorInput = driveController.getLeftTriggerAxis();
+    double intakeMotorInputL = driveController.getLeftTriggerAxis();
+    double intakeMotorInputR = driveController.getRightTriggerAxis();
+    
     double forwardSpeed =driveController.getLeftY();
     double rotationSpeed = driveController.getRightX();
     drive.arcadeDrive(-forwardSpeed,-rotationSpeed);
-    intakeMotor.set(ControlMode.PercentOutput,intakeMotorInput);
+    if(intakeMotorInputL>0.02 && intakeMotorInputR>0.02){
+      intakeMotor.set(ControlMode.PercentOutput,intakeMotorInputL);
+    } else if(intakeMotorInputL>0.02 && intakeMotorInputR<0.02){
+      intakeMotor.set(ControlMode.PercentOutput,intakeMotorInputL);
+    } else if(intakeMotorInputL<0.02 && intakeMotorInputR>0.02){
+      intakeMotor.set(ControlMode.PercentOutput,intakeMotorInputR);
+    } else{
+      intakeMotor.set(ControlMode.PercentOutput,0);
+    }
+    
+    
     }
   @Override
   public void disabledInit() {}
