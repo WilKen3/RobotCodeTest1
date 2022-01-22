@@ -62,7 +62,7 @@ XboxController driveController;
   public void teleopPeriodic() {
     double forwardSpeed =driveController.getLeftY();
     double rotationSpeed = driveController.getRightX();
-    drive.arcadeDrive(forwardSpeed,rotationSpeed);
+    drive.arcadeDrive(-forwardSpeed,-rotationSpeed);
     }
   @Override
   public void disabledInit() {}
