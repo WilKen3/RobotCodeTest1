@@ -1,10 +1,12 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 /**import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;**/
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 /**import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; **/
@@ -13,7 +15,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Robot extends TimedRobot {
 WPI_TalonSRX dRF, dLF;
-VictorSPX dRB, dLB; 
+VictorSPX dRB, dLB, intakeMotor; 
 DifferentialDrive drive;
 XboxController driveController;
 
@@ -31,6 +33,7 @@ XboxController driveController;
     dRB.follow(dRF);
     driveController = new XboxController(0);
     drive = new DifferentialDrive(dLF, dRF);
+    intakeMotor = new VictorSPX(14);
   }
   @Override
   public void robotPeriodic(){
@@ -60,9 +63,11 @@ XboxController driveController;
 
   @Override
   public void teleopPeriodic() {
+    double intakeMotorInput = driveController.getLeftTriggerAxis();
     double forwardSpeed =driveController.getLeftY();
     double rotationSpeed = driveController.getRightX();
     drive.arcadeDrive(-forwardSpeed,-rotationSpeed);
+    intakeMotor.set(ControlMode.PercentOutput,intakeMotorInput);
     }
   @Override
   public void disabledInit() {}
