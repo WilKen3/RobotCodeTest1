@@ -46,9 +46,12 @@ DifferentialDrive drive;
   }
   @Override
   public void teleopInit() {}
+  int i =0;
+  int k =0;
   @Override
   public void teleopPeriodic() {
-    int i =+1;
+    i = i++ % 250;
+    
     if(i < 150) { 
       drive.arcadeDrive(0.5, 0.0);
     } else if(i < 250){
