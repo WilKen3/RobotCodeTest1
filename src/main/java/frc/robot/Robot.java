@@ -18,11 +18,11 @@ DifferentialDrive;
 
 
 public class Robot extends TimedRobot {
-WPI_TalonSRX dRF, dLF, armMotor;
+WPI_TalonSRX dRF, dLF;
 VictorSPX dRB, dLB, intakeMotor; 
 DifferentialDrive drive;
 XboxController driveController;
-SensorCollection armEncoder;
+Arm arm;
 
   
   
@@ -39,17 +39,9 @@ SensorCollection armEncoder;
     driveController = new XboxController(0);
     drive = new DifferentialDrive(dLF, dRF);
     intakeMotor = new VictorSPX(14);
-    armMotor = new WPI_TalonSRX(3);
+    arm = new Arm();
 
-    armEncoder = new SensorCollection(armMotor);
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 30);
-    armMotor.config_kF(0, 0, 30);
-    armMotor.config_kP(0, 8, 30);
-    armMotor.config_kI(0, 0.01, 30);
-    armMotor.config_kD(0,10,30);
-    armMotor.configMaxIntegralAccumulator(0,0,30);
-    armMotor.setSensorPhase(true);
-    armMotor.setInverted(true);
+    
   }
   @Override
   public void robotPeriodic(){
@@ -69,8 +61,8 @@ SensorCollection armEncoder;
     // } else if(i < 250){
     //  drive.arcadeDrive(-0.5,0.0);
     // }
-
-    System.out.print(armEncoder.getAnalogInRaw());
+    
+    System.out.println(arm.getArmAngle());
   }
   @Override
   public void teleopInit() {}
@@ -84,11 +76,10 @@ SensorCollection armEncoder;
   
     boolean armMotorInput = driveController.getBButton();
     if(armMotorInput == true){
-      armMotor.set(ControlMode.PercentOutput,-0.5);
+      arm.armSet(ControlMode.PercentOutput,-0.5);
     } else {
-      armMotor.set(ControlMode.PercentOutput,-0.1);
+      arm.armSet(ControlMode.PercentOutput,-0.1);
     }
-
 
 
     double forwardSpeed =driveController.getLeftY();
