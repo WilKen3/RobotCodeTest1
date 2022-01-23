@@ -63,14 +63,19 @@ Arm arm;
     // }
     
     System.out.println(arm.getArmAngle());
-    arm.ArmPIDMove(0);
+    // arm.ArmPIDMove(45);
+    boolean APression = driveController.getAButton();
+    if(APression) {
+      arm.ArmPIDMove(45);
+    }else {
+      arm.ArmRelease();
+    }
+    
   }
   @Override
   public void teleopInit() {}
   int i =0;
   int k =0;
- 
-
 
   @Override
   public void teleopPeriodic() {
