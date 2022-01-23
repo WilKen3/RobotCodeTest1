@@ -64,12 +64,7 @@ Arm arm;
     
     System.out.println(arm.getArmAngle());
     // arm.ArmPIDMove(45);
-    boolean APression = driveController.getAButton();
-    if(APression) {
-      arm.ArmPIDMove(45);
-    }else {
-      arm.ArmRelease();
-    }
+    
     
   }
   @Override
@@ -79,13 +74,21 @@ Arm arm;
 
   @Override
   public void teleopPeriodic() {
-  
-    boolean armMotorInput = driveController.getBButton();
-    if(armMotorInput == true){
-      arm.armSet(ControlMode.PercentOutput,-0.5);
-    } else {
-      arm.armSet(ControlMode.PercentOutput,-0.1);
+
+    boolean APression = driveController.getAButton();
+    System.out.println(APression);
+    if(APression) {
+      arm.ArmPIDMove(45);
+    }else {
+      arm.ArmRelease();
     }
+  
+    // boolean armMotorInput = driveController.getBButton();
+    // if(armMotorInput == true){
+    //   arm.armSet(ControlMode.PercentOutput,-0.5);
+    // } else {
+    //   arm.armSet(ControlMode.PercentOutput,-0.1);
+    // }
 
 
     double forwardSpeed =driveController.getLeftY();
