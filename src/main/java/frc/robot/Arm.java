@@ -55,6 +55,6 @@ public class Arm {
         DemandType.ArbitraryFeedForward, 0.13*Math.cos(Math.toRadians(getArmAngle())));
     }
     public void ArmRelease(){
-        armMotor.set(ControlMode.PercentOutput, 0.5);
+        armMotor.set(ControlMode.PercentOutput, 0.05);
     }
 }
