@@ -1,8 +1,8 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.SensorCollection;
+// import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+// import com.ctre.phoenix.motorcontrol.SensorCollection;
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 /**import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;**/
@@ -63,6 +63,7 @@ Arm arm;
     // }
     
     System.out.println(arm.getArmAngle());
+    arm.ArmPIDMove(0);
   }
   @Override
   public void teleopInit() {}
