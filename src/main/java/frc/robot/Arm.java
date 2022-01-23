@@ -16,16 +16,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; **/
 public class Arm {
     SensorCollection armPoint;
     WPI_TalonSRX armMotor;
-    
+
     Arm(){
         armMotor = new WPI_TalonSRX(3);
         armPoint = new SensorCollection(armMotor);
     }
     
     public double angleToPoint(double Angle) {
-        double angleValue = ((118*Angle)/335);
-        double pointValue = angleValue - ((118*181)/335);
-        return pointValue;
+        double angleDiff = Angle - (-32);
+        double angleRange = 86 - (-32);
+        double pointRange = 516 - 181;
+        return angleDiff*(pointRange/angleRange) + 181;
         
     }
+
 }
