@@ -143,12 +143,12 @@ IntakeBelt intakeBelt;
     }
     switch(intakeBelt) {
       case out:
-        intakeF.set(ControlMode.PercentOutput, 0.5);
-        intakeB.set(ControlMode.PercentOutput, 0.5);
+        intakeF.set(ControlMode.PercentOutput, 1);
+        intakeB.set(ControlMode.PercentOutput, 1);
         break;
       case in:
-        intakeF.set(ControlMode.PercentOutput, -0.5);
-        intakeB.set(ControlMode.PercentOutput, -0.5);
+        intakeF.set(ControlMode.PercentOutput, -1);
+        intakeB.set(ControlMode.PercentOutput, -1);
         break;
       case neutral:
         intakeF.set(ControlMode.PercentOutput,0);
@@ -165,12 +165,12 @@ IntakeBelt intakeBelt;
     }
     switch(shooterMotor) {
       case out:
-        shooterR.set(ControlMode.PercentOutput,0.5);
-        shooterL.set(ControlMode.PercentOutput, -0.5);
+        shooterR.set(ControlMode.PercentOutput,0.7);
+        shooterL.set(ControlMode.PercentOutput, -0.7);
         break;
       case in:
-        shooterR.set(ControlMode.PercentOutput, -0.5);
-        shooterL.set(ControlMode.PercentOutput, 0.5);
+        shooterR.set(ControlMode.PercentOutput, -0.6);
+        shooterL.set(ControlMode.PercentOutput, 0.6);
         break;
       case neutral:
         shooterR.set(ControlMode.PercentOutput, 0);
