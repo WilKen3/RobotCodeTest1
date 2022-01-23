@@ -44,6 +44,8 @@ Arm arm;
     intakeB = new VictorSPX(15);
     shooterL = new WPI_TalonSRX(5);
     shooterR = new WPI_TalonSRX(4);
+    shooterL.config_kP(0, 6, 30);
+    shooterR.config_kP(0, 6, 30);
 
     
   }
