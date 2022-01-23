@@ -29,19 +29,19 @@ public class Const {
     public static final int FTimeout = 30;
 
     public static final int PslotIdx = 0;
-    public static final double PVofP = 8;
+    public static final double PVofP = 6.125;
     public static final int PTimeout = 30;
 
     public static final int IslotIdx = 0;
-    public static final double IVofP = 0.01;
+    public static final double IVofP = 0.005;
     public static final int ITimeout = 30;
 
     public static final int DslotIdx = 0;
-    public static final double DVofP = 10;
+    public static final double DVofP = 250;
     public static final int DTimeout = 30;
 
     public static final int MIAslotdx = 0;
-    public static final double MIAiaccum = 0;
+    public static final double MIAiaccum = 30000;
     public static final int MIATimeout = 30;
 
     // feedback sensor
