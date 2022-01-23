@@ -19,7 +19,7 @@ DifferentialDrive;
 
 public class Robot extends TimedRobot {
 WPI_TalonSRX dRF, dLF;
-VictorSPX dRB, dLB, intakeMotor; 
+VictorSPX dRB, dLB, intakeMotor, intakeF, intakeB; 
 DifferentialDrive drive;
 XboxController driveController;
 Arm arm;
@@ -40,6 +40,8 @@ Arm arm;
     drive = new DifferentialDrive(dLF, dRF);
     intakeMotor = new VictorSPX(Const.IntakeMotor);
     arm = new Arm();
+    intakeF = new VictorSPX(11);
+    intakeB = new VictorSPX(15);
 
     
   }
@@ -70,7 +72,12 @@ Arm arm;
     neutral
   }
   IntakeSpeed intakeSpeed;
-
+enum IntakeBelt { 
+  out,
+  in,
+  neutral
+}
+IntakeBelt intakeBelt;
 
   
   @Override
@@ -118,7 +125,27 @@ Arm arm;
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
         break;
     }
-   
+    if (driveController.getLeftBumper()){
+      intakeBelt = IntakeBelt.out;
+    }else if(driveController.getRightBumper()) {
+      intakeBelt = IntakeBelt.in;
+    }else {
+      intakeBelt = IntakeBelt.neutral;
+    }
+    switch(intakeBelt) {
+      case out:
+        intakeF.set(ControlMode.PercentOutput, 0.5);
+        intakeB.set(ControlMode.PercentOutput, 0.5);
+        break;
+      case in:
+        intakeF.set(ControlMode.PercentOutput, -0.5);
+        intakeB.set(ControlMode.PercentOutput, -0.5);
+        break;
+      case neutral:
+        intakeF.set(ControlMode.PercentOutput,0);
+        intakeB.set(ControlMode.PercentOutput,0);
+
+    }
     
     }
   @Override
