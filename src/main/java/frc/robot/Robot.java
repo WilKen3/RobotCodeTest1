@@ -71,7 +71,15 @@ Arm arm;
   public void teleopInit() {}
   int i =0;
   int k =0;
+  enum IntakeSpeed {
+    out,
+    in,
+    neutral
+  }
+  IntakeSpeed intakeSpeed;
 
+
+  
   @Override
   public void teleopPeriodic() {
 
@@ -95,17 +103,30 @@ Arm arm;
     double rotationSpeed = driveController.getRightX();
     drive.arcadeDrive(-forwardSpeed,rotationSpeed);
 
-    double intakeMotorInputL = driveController.getLeftTriggerAxis();
-    double intakeMotorInputR = driveController.getRightTriggerAxis();
-    if(intakeMotorInputL>0.03 && intakeMotorInputR>0.03){
-      intakeMotor.set(ControlMode.PercentOutput,-intakeMotorInputL*0.1);
-    } else if(intakeMotorInputL>0.03 && intakeMotorInputR<0.03){
-      intakeMotor.set(ControlMode.PercentOutput,-intakeMotorInputL*0.1);
-    } else if(intakeMotorInputL<0.03 && intakeMotorInputR>0.03){
-      intakeMotor.set(ControlMode.PercentOutput,intakeMotorInputR*0.1);
-    } else{
-      intakeMotor.set(ControlMode.PercentOutput,0);
-    }   
+    double tCL = driveController.getLeftTriggerAxis();
+    double tCR = driveController.getRightTriggerAxis();
+    
+     if(tCL > 0.03){
+       intakeSpeed = IntakeSpeed.in;
+     }else if(tCR > 0.03){
+       intakeSpeed = IntakeSpeed.out;
+     }else{
+       intakeSpeed = IntakeSpeed.neutral;
+     }
+     
+    switch(intakeSpeed) {
+      case out:
+        intakeMotor.set(ControlMode.PercentOutput, 0.5);
+        break;
+      case in:
+        intakeMotor.set(ControlMode.PercentOutput, -0.5);
+        break;
+      case neutral:
+        intakeMotor.set(ControlMode.PercentOutput, 0);
+        break;
+    }
+   
+    
     }
   @Override
   public void disabledInit() {}
