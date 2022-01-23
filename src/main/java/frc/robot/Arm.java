@@ -19,29 +19,29 @@ public class Arm {
     private WPI_TalonSRX armMotor;
 
     Arm(){
-        armMotor = new WPI_TalonSRX(3);
+        armMotor = new WPI_TalonSRX(Const.ArmMotor);
         armPoint = new SensorCollection(armMotor); 
-        armMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 30);
-        armMotor.config_kF(0, 0, 30);
-        armMotor.config_kP(0, 8, 30);
-        armMotor.config_kI(0, 0.01, 30);
-        armMotor.config_kD(0,10,30);
-        armMotor.configMaxIntegralAccumulator(0,0,30);
+        armMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, Const.SFSPidIdx, Const.SFSTimeoutMS);
+        armMotor.config_kF(Const.FslotIdx, Const.FVofP, Const.FTimeout);
+        armMotor.config_kP(Const.PslotIdx, Const.PVofP, Const.PTimeout);
+        armMotor.config_kI(Const.IslotIdx, Const.IVofP, Const.ITimeout);
+        armMotor.config_kD(Const.DslotIdx, Const.DVofP, Const.DTimeout);
+        armMotor.configMaxIntegralAccumulator(Const.MIAslotdx, Const.MIAiaccum, Const.MIATimeout);
         armMotor.setSensorPhase(true);
         armMotor.setInverted(true);
     }
 
     public double angleToPoint(double Angle) {
-        double angleDiff = Angle - (-32);
-        double angleRange = 86 - (-32);
-        double pointRange = 516 - 181;
-        return angleDiff*(pointRange/angleRange) + 181;
+        double angleDiff = Angle - Const.LowAngle;
+        double angleRange = Const.HighAngle - Const.LowAngle;
+        double pointRange = Const.HighPoint - Const.LowPoint;
+        return angleDiff*(pointRange/angleRange) + Const.LowPoint;
     }
     public double pointToAngle(double Point) {
-        double pointDiff = Point - 181;
-        double angleRange = 86 - (-32);
-        double pointRange = 516 - 181;
-        return pointDiff*(angleRange/pointRange) + (-32);
+        double pointDiff = Point - Const.LowPoint;
+        double angleRange = Const.HighAngle - Const.LowAngle;
+        double pointRange = Const.HighPoint - Const.LowPoint;
+        return pointDiff*(angleRange/pointRange) + Const.LowAngle;
         
     }
     public double getArmAngle() {
@@ -52,9 +52,9 @@ public class Arm {
     }
     public void ArmPIDMove(double Angle) {
         armMotor.set(ControlMode.Position, angleToPoint(Angle),
-        DemandType.ArbitraryFeedForward, 0.13*Math.cos(Math.toRadians(getArmAngle())));
+        DemandType.ArbitraryFeedForward, Const.ArmGCoef*Math.cos(Math.toRadians(getArmAngle())));
     }
     public void ArmRelease(){
-        armMotor.set(ControlMode.PercentOutput, -0.04*Math.cos(Math.toRadians(getArmAngle())));
+        armMotor.set(ControlMode.PercentOutput, Const.ArmFFCoef*Math.cos(Math.toRadians(getArmAngle())));
     }
 }

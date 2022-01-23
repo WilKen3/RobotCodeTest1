@@ -28,17 +28,17 @@ Arm arm;
   
   @Override
   public void robotInit() {
-    dRF = new WPI_TalonSRX(2);
-    dLF = new WPI_TalonSRX(6);
-    dRB = new VictorSPX(12);
-    dLB = new VictorSPX(13);
+    dRF = new WPI_TalonSRX(Const.DriveRightFront);
+    dLF = new WPI_TalonSRX(Const.DriveLeftFront);
+    dRB = new VictorSPX(Const.DriveRightBack);
+    dLB = new VictorSPX(Const.DriveLeftBack);
     dLB.follow(dLF);
     dRF.setInverted(true);
     dRB.setInverted(true);
     dRB.follow(dRF);
-    driveController = new XboxController(0);
+    driveController = new XboxController(Const.DriveController);
     drive = new DifferentialDrive(dLF, dRF);
-    intakeMotor = new VictorSPX(14);
+    intakeMotor = new VictorSPX(Const.IntakeMotor);
     arm = new Arm();
 
     
@@ -54,13 +54,7 @@ Arm arm;
   }
   @Override
   public void autonomousPeriodic() {
-    //  i = i++ % 250;
-    
-    // if(i < 150) { 
-    //   drive.arcadeDrive(0.5, 0.0);
-    // } else if(i < 250){
-    //  drive.arcadeDrive(-0.5,0.0);
-    // }
+ 
     
     System.out.println(arm.getArmAngle());
     // arm.ArmPIDMove(45);
@@ -69,8 +63,7 @@ Arm arm;
   }
   @Override
   public void teleopInit() {}
-  int i =0;
-  int k =0;
+ 
   enum IntakeSpeed {
     out,
     in,
@@ -86,7 +79,7 @@ Arm arm;
     boolean APression = driveController.getAButton();
     System.out.println(APression);
     if(APression) {
-      arm.ArmPIDMove(0);
+      arm.ArmPIDMove(Const.SetAngle);
     }else {
       arm.ArmRelease();
     }
@@ -106,23 +99,23 @@ Arm arm;
     double tCL = driveController.getLeftTriggerAxis();
     double tCR = driveController.getRightTriggerAxis();
     
-     if(tCL > 0.03){
-       intakeSpeed = IntakeSpeed.in;
-     }else if(tCR > 0.03){
-       intakeSpeed = IntakeSpeed.out;
-     }else{
-       intakeSpeed = IntakeSpeed.neutral;
-     }
-     
+    if(tCL > Const.Deadband){
+      intakeSpeed = IntakeSpeed.in;
+    }else if(tCR > Const.Deadband){
+      intakeSpeed = IntakeSpeed.out;
+    }else{
+      intakeSpeed = IntakeSpeed.neutral;
+    }
+
     switch(intakeSpeed) {
       case out:
-        intakeMotor.set(ControlMode.PercentOutput, 0.5);
+        intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
         break;
       case in:
-        intakeMotor.set(ControlMode.PercentOutput, -0.5);
+        intakeMotor.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
         break;
       case neutral:
-        intakeMotor.set(ControlMode.PercentOutput, 0);
+        intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
         break;
     }
    
