@@ -78,7 +78,7 @@ Arm arm;
     boolean APression = driveController.getAButton();
     System.out.println(APression);
     if(APression) {
-      arm.ArmPIDMove(45);
+      arm.ArmPIDMove(0);
     }else {
       arm.ArmRelease();
     }
