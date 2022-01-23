@@ -1,7 +1,9 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.SensorCollection;
+//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 /**import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;**/
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -10,7 +12,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 /**import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; **/
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.
+
+DifferentialDrive;
 
 
 public class Robot extends TimedRobot {
@@ -18,6 +22,7 @@ WPI_TalonSRX dRF, dLF, armMotor;
 VictorSPX dRB, dLB, intakeMotor; 
 DifferentialDrive drive;
 XboxController driveController;
+SensorCollection armEncoder;
 
   
   
@@ -35,6 +40,16 @@ XboxController driveController;
     drive = new DifferentialDrive(dLF, dRF);
     intakeMotor = new VictorSPX(14);
     armMotor = new WPI_TalonSRX(3);
+
+    armEncoder = new SensorCollection(armMotor);
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 30);
+    armMotor.config_kF(0, 0, 30);
+    armMotor.config_kP(0, 8, 30);
+    armMotor.config_kI(0, 0.01, 30);
+    armMotor.config_kD(0,10,30);
+    armMotor.configMaxIntegralAccumulator(0,0,30);
+    armMotor.setSensorPhase(true);
+    armMotor.setInverted(true);
   }
   @Override
   public void robotPeriodic(){
@@ -47,13 +62,15 @@ XboxController driveController;
   }
   @Override
   public void autonomousPeriodic() {
-    i = i++ % 250;
+    //  i = i++ % 250;
     
-    if(i < 150) { 
-      drive.arcadeDrive(0.5, 0.0);
-    } else if(i < 250){
-     drive.arcadeDrive(-0.5,0.0);
-    }
+    // if(i < 150) { 
+    //   drive.arcadeDrive(0.5, 0.0);
+    // } else if(i < 250){
+    //  drive.arcadeDrive(-0.5,0.0);
+    // }
+
+    System.out.print(armEncoder.getAnalogInRaw());
   }
   @Override
   public void teleopInit() {}
@@ -67,9 +84,9 @@ XboxController driveController;
   
     boolean armMotorInput = driveController.getBButton();
     if(armMotorInput == true){
-      armMotor.set(ControlMode.PercentOutput,-0.5);
+      armMotor.set(ControlMode.PercentOutput,-);
     } else {
-      armMotor.set(ControlMode.PercentOutput,-0.2);
+      armMotor.set(ControlMode.PercentOutput,-0.1);
     }
 
 
@@ -88,10 +105,7 @@ XboxController driveController;
       intakeMotor.set(ControlMode.PercentOutput,intakeMotorInputR*0.1);
     } else{
       intakeMotor.set(ControlMode.PercentOutput,0);
-    }
-
-    
-    
+    }   
     }
   @Override
   public void disabledInit() {}
