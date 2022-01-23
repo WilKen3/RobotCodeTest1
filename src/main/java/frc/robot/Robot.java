@@ -18,7 +18,7 @@ DifferentialDrive;
 
 
 public class Robot extends TimedRobot {
-WPI_TalonSRX dRF, dLF;
+WPI_TalonSRX dRF, dLF, shooterL, shooterR;
 VictorSPX dRB, dLB, intakeMotor, intakeF, intakeB; 
 DifferentialDrive drive;
 XboxController driveController;
@@ -42,6 +42,8 @@ Arm arm;
     arm = new Arm();
     intakeF = new VictorSPX(11);
     intakeB = new VictorSPX(15);
+    shooterL = new WPI_TalonSRX(5);
+    shooterR = new WPI_TalonSRX(4);
 
     
   }
@@ -72,13 +74,20 @@ Arm arm;
     neutral
   }
   IntakeSpeed intakeSpeed;
-enum IntakeBelt { 
-  out,
-  in,
-  neutral
+
+  enum IntakeBelt { 
+    out,
+    in,
+    neutral
 }
 IntakeBelt intakeBelt;
 
+  enum ShooterMotor {
+    in,
+    out,
+    neutral
+  }
+  ShooterMotor shooterMotor;
   
   @Override
   public void teleopPeriodic() {
@@ -113,7 +122,6 @@ IntakeBelt intakeBelt;
     }else{
       intakeSpeed = IntakeSpeed.neutral;
     }
-
     switch(intakeSpeed) {
       case out:
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
@@ -125,6 +133,7 @@ IntakeBelt intakeBelt;
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
         break;
     }
+
     if (driveController.getLeftBumper()){
       intakeBelt = IntakeBelt.out;
     }else if(driveController.getRightBumper()) {
@@ -147,6 +156,27 @@ IntakeBelt intakeBelt;
 
     }
     
+    if (driveController.getLeftBumper()) {
+      shooterMotor = ShooterMotor.out;
+    }else if(driveController.getRightBumper()) {
+      shooterMotor = ShooterMotor.in;
+    }else {
+      shooterMotor = ShooterMotor.neutral;
+    }
+    switch(shooterMotor) {
+      case out:
+        shooterR.set(ControlMode.PercentOutput,0.5);
+        shooterL.set(ControlMode.PercentOutput, -0.5);
+        break;
+      case in:
+        shooterR.set(ControlMode.PercentOutput, -0.5);
+        shooterL.set(ControlMode.PercentOutput, 0.5);
+        break;
+      case neutral:
+        shooterR.set(ControlMode.PercentOutput, 0);
+        shooterL.set(ControlMode.PercentOutput, 0);
+        break;
+    }
     }
   @Override
   public void disabledInit() {}
