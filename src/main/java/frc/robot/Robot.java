@@ -84,7 +84,7 @@ SensorCollection armEncoder;
   
     boolean armMotorInput = driveController.getBButton();
     if(armMotorInput == true){
-      armMotor.set(ControlMode.PercentOutput,-);
+      armMotor.set(ControlMode.PercentOutput,-0.5);
     } else {
       armMotor.set(ControlMode.PercentOutput,-0.1);
     }
