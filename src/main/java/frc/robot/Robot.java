@@ -78,7 +78,8 @@ DigitalInput ballSensorF, ballSensorB;
   enum Intake {
     in,
     out,
-    neutral
+    neutral,
+    shoot
   }
   Intake intake;
   
@@ -114,7 +115,7 @@ DigitalInput ballSensorF, ballSensorB;
     switch (intake) {
       case in:
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
-        shooterL.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
+        shooterL.set(ControlMode.PercentOutput, Const.IntakeSpeed);
         shooterR.set(ControlMode.PercentOutput, Const.IntakeSpeed);
         intakeF.set(ControlMode.PercentOutput, -1);
         if(!SB){
@@ -129,8 +130,8 @@ DigitalInput ballSensorF, ballSensorB;
         break;
       case out:
         intakeMotor.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
-        shooterL.set(ControlMode.PercentOutput, -Const.OuttakeSpeed);
-        shooterR.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
+        shooterL.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
+        shooterR.set(ControlMode.PercentOutput, -Const.OuttakeSpeed);
         intakeB.set(ControlMode.PercentOutput, 1);
         intakeF.set(ControlMode.PercentOutput, 1);
         break;
@@ -141,21 +142,11 @@ DigitalInput ballSensorF, ballSensorB;
         intakeB.set(ControlMode.PercentOutput, 0);
         intakeF.set(ControlMode.PercentOutput, 0);
         break;    
+      case shoot:
+        shooterL.set()
     }
     
-    //shooter
-    if(driveController.getLeftTriggerAxis()>0.3){
-      shooterL.set(ControlMode.PercentOutput, Const.ShooterLeftOut);
-      shooterR.set(ControlMode.PercentOutput, Const.ShooterRightOut);
-      intakeB.set(ControlMode.PercentOutput, 1);
-      intakeF.set(ControlMode.PercentOutput, 1);
-    } else {
-      shooterL.set(ControlMode.PercentOutput, 0);
-      shooterR.set(ControlMode.PercentOutput, 0);
-      intakeB.set(ControlMode.PercentOutput, 0);
-      intakeF.set(ControlMode.PercentOutput, 0);
 
-    }
   }
   @Override
   public void disabledInit() {}
