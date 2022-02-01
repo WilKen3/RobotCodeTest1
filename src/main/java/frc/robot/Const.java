@@ -12,11 +12,11 @@ public class Const {
     // Deadband and intakemotor
     
     public static final double Deadband = 0.03;
-    public static final double IntakeSpeed = 0.5;
-    public static final double OuttakeSpeed = -0.5;
+    public static final double IntakeSpeed = 0.3;
+    public static final double OuttakeSpeed = -0.3;
     public static final double IntakeNeutral = 0;
-    public static final double ShooterLeftOut = 0.7;
-    public static final double ShooterRightOut = -0.7;
+    public static final double ShooterLeftOut = -0.7;
+    public static final double ShooterRightOut = 0.7;
     // angle to point, point to angle
     public static final int LowAngle = -32;
     public static final int HighAngle = 86;

@@ -122,12 +122,10 @@ DigitalInput ballSensorF, ballSensorB;
         intakeF.set(ControlMode.PercentOutput, -1);
         if(!SB){
           intakeB.set(ControlMode.PercentOutput, 0);
-          intakeF.set(ControlMode.PercentOutput, 0);
         } else if(!SF) {
           intakeB.set(ControlMode.PercentOutput, -1);
         } else {
           intakeB.set(ControlMode.PercentOutput, 0);
-          intakeF.set(ControlMode.PercentOutput, 0);
         }
         break;
       case out:
