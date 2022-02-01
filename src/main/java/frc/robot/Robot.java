@@ -1,14 +1,13 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-// import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-// import com.ctre.phoenix.motorcontrol.SensorCollection;
-//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-/**import com.ctre.phoenix.motorcontrol.*;
+/**import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+ import com.ctre.phoenix.motorcontrol.SensorCollection;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;**/
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -17,7 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; **/
 import edu.wpi.first.wpilibj.drive.
 
 DifferentialDrive;
-
 
 public class Robot extends TimedRobot {
 WPI_TalonSRX dRF, dLF, shooterL, shooterR;
@@ -74,32 +72,20 @@ DigitalInput ballSensorF, ballSensorB;
     
   }
   @Override
+
+
   public void teleopInit() {}
- 
-  enum IntakeSpeed {
-    out,
-    in,
-    neutral
-  }
-  IntakeSpeed intakeSpeed;
-
-  enum IntakeBelt { 
-    out,
-    in,
-    neutral
-}
-IntakeBelt intakeBelt;
-
-  enum ShooterMotor {
+  enum Intake {
     in,
     out,
     neutral
   }
-  ShooterMotor shooterMotor;
+  Intake intake;
   
   @Override
   public void teleopPeriodic() {
 
+    //arm control
     boolean APression = driveController.getAButton();
     System.out.println(APression);
     if(APression) {
@@ -107,91 +93,69 @@ IntakeBelt intakeBelt;
     }else {
       arm.ArmRelease();
     }
-  
-    // boolean armMotorInput = driveController.getBButton();
-    // if(armMotorInput == true){
-    //   arm.armSet(ControlMode.PercentOutput,-0.5);
-    // } else {
-    //   arm.armSet(ControlMode.PercentOutput,-0.1);
-    // }
 
     // drive train
     double forwardSpeed =driveController.getLeftY();
     double rotationSpeed = driveController.getRightX();
     drive.arcadeDrive(-forwardSpeed,rotationSpeed);
 
-    //intake motor
-    double tCL = driveController.getLeftTriggerAxis();
-    double tCR = driveController.getRightTriggerAxis();
-    if(tCL > Const.Deadband){
-      intakeSpeed = IntakeSpeed.in;
-    }else if(tCR > Const.Deadband){
-      intakeSpeed = IntakeSpeed.out;
-    }else{
-      intakeSpeed = IntakeSpeed.neutral;
-    }
-    switch(intakeSpeed) {
-      case out:
-        intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
-        break;
-      case in:
-        intakeMotor.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
-        break;
-      case neutral:
-        intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
-        break;
-    }
-    
-    
+   
     //intake belt using sensors 
     boolean SF = ballSensorF.get();
     boolean SB = ballSensorB.get();
 
-    if (driveController.getLeftBumper()){
-      intakeBelt = IntakeBelt.out;
-    }else if(driveController.getRightBumper()) {
-      intakeBelt = IntakeBelt.in;
-    }else {
-      intakeBelt = IntakeBelt.neutral;
-    }
-    switch(intakeBelt) {
-      case out:
-        intakeF.set(ControlMode.PercentOutput, 1);
-        intakeB.set(ControlMode.PercentOutput, 1);
-        break;
+    switch (intake) {
       case in:
-        intakeF.set(ControlMode.PercentOutput, -1);
-        intakeB.set(ControlMode.PercentOutput, -1);
+        intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
+        shooterL.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
+        shooterR.set(ControlMode.PercentOutput, Const.IntakeSpeed);
+        if(SB){
+          intakeB.set(ControlMode.PercentOutput, 0);
+          intakeF.set(ControlMode.PercentOutput, 0);
+        } else if(SF) {
+          intakeB.set(ControlMode.PercentOutput, -1);
+          intakeF.set(ControlMode.PercentOutput, -1);
+        } else {
+          intakeB.set(ControlMode.PercentOutput, 0);
+          intakeF.set(ControlMode.PercentOutput, 0);
+        }
+        break;
+      case out:
+        intakeMotor.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
+        shooterL.set(ControlMode.PercentOutput, -Const.OuttakeSpeed);
+        shooterR.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
+        intakeB.set(ControlMode.PercentOutput, 1);
+        intakeF.set(ControlMode.PercentOutput, 1);
         break;
       case neutral:
-        intakeF.set(ControlMode.PercentOutput,0);
-        intakeB.set(ControlMode.PercentOutput,0);
-
+        intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+        shooterL.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+        shooterR.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+        intakeB.set(ControlMode.PercentOutput, 0);
+        intakeF.set(ControlMode.PercentOutput, 0);
+        break;    
+    }
+    if(driveController.getRightBumper()){
+      intake = Intake.in;
+    } else if(driveController.getLeftBumper()){
+      intake = Intake.out;
+    } else {
+      intake = Intake.neutral;
     }
     
-    //shooter motor
-    if (driveController.getLeftBumper()) {
-      shooterMotor = ShooterMotor.out;
-    }else if(driveController.getRightBumper()) {
-      shooterMotor = ShooterMotor.in;
-    }else {
-      shooterMotor = ShooterMotor.neutral;
+    //shooter
+    if(driveController.getLeftTriggerAxis()>0.3){
+      shooterL.set(ControlMode.PercentOutput, Const.ShooterLeftOut);
+      shooterR.set(ControlMode.PercentOutput, Const.ShooterRightOut);
+      intakeB.set(ControlMode.PercentOutput, 1);
+      intakeF.set(ControlMode.PercentOutput, 1);
+    } else {
+      shooterL.set(ControlMode.PercentOutput, 0);
+      shooterR.set(ControlMode.PercentOutput, 0);
+      intakeB.set(ControlMode.PercentOutput, 0);
+      intakeF.set(ControlMode.PercentOutput, 0);
+
     }
-    switch(shooterMotor) {
-      case out:
-        shooterR.set(ControlMode.PercentOutput,0.7);
-        shooterL.set(ControlMode.PercentOutput, -0.7);
-        break;
-      case in:
-        shooterR.set(ControlMode.PercentOutput, -0.6);
-        shooterL.set(ControlMode.PercentOutput, 0.6);
-        break;
-      case neutral:
-        shooterR.set(ControlMode.PercentOutput, 0);
-        shooterL.set(ControlMode.PercentOutput, 0);
-        break;
-    }
-      
   }
   @Override
   public void disabledInit() {}
