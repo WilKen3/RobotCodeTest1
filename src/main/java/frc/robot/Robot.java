@@ -103,7 +103,14 @@ DigitalInput ballSensorF, ballSensorB;
     //intake belt using sensors 
     boolean SF = ballSensorF.get();
     boolean SB = ballSensorB.get();
-
+    
+    if(driveController.getRightBumper()){
+      intake = Intake.in;
+    } else if(driveController.getLeftBumper()){
+      intake = Intake.out;
+    } else {
+      intake = Intake.neutral;
+    }
     switch (intake) {
       case in:
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
@@ -134,13 +141,6 @@ DigitalInput ballSensorF, ballSensorB;
         intakeB.set(ControlMode.PercentOutput, 0);
         intakeF.set(ControlMode.PercentOutput, 0);
         break;    
-    }
-    if(driveController.getRightBumper()){
-      intake = Intake.in;
-    } else if(driveController.getLeftBumper()){
-      intake = Intake.out;
-    } else {
-      intake = Intake.neutral;
     }
     
     //shooter
