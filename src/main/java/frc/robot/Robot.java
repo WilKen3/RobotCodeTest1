@@ -78,7 +78,8 @@ DigitalInput ballSensorF, ballSensorB;
   enum Intake {
     in,
     out,
-    neutral
+    neutral,
+    shoot
   }
   Intake intake;
   
@@ -108,6 +109,8 @@ DigitalInput ballSensorF, ballSensorB;
       intake = Intake.in;
     } else if(driveController.getLeftBumper()){
       intake = Intake.out;
+    } else if(driveController.getLeftTriggerAxis()>0.3){
+      intake = Intake.shoot;
     } else {
       intake = Intake.neutral;
     }
@@ -129,8 +132,8 @@ DigitalInput ballSensorF, ballSensorB;
         break;
       case out:
         intakeMotor.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
-        shooterL.set(ControlMode.PercentOutput, -Const.OuttakeSpeed);
-        shooterR.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
+        shooterL.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
+        shooterR.set(ControlMode.PercentOutput, -Const.OuttakeSpeed);
         intakeB.set(ControlMode.PercentOutput, 1);
         intakeF.set(ControlMode.PercentOutput, 1);
         break;
@@ -138,23 +141,14 @@ DigitalInput ballSensorF, ballSensorB;
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
         shooterL.set(ControlMode.PercentOutput, Const.IntakeNeutral);
         shooterR.set(ControlMode.PercentOutput, Const.IntakeNeutral);
-        intakeB.set(ControlMode.PercentOutput, 0);
-        intakeF.set(ControlMode.PercentOutput, 0);
+        intakeB.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+        intakeF.set(ControlMode.PercentOutput, Const.IntakeNeutral);
         break;    
-    }
-    
-    //shooter
-    if(driveController.getLeftTriggerAxis()>0.3){
-      shooterL.set(ControlMode.PercentOutput, Const.ShooterLeftOut);
-      shooterR.set(ControlMode.PercentOutput, Const.ShooterRightOut);
-      intakeB.set(ControlMode.PercentOutput, 1);
-      intakeF.set(ControlMode.PercentOutput, 1);
-    } else {
-      shooterL.set(ControlMode.PercentOutput, 0);
-      shooterR.set(ControlMode.PercentOutput, 0);
-      intakeB.set(ControlMode.PercentOutput, 0);
-      intakeF.set(ControlMode.PercentOutput, 0);
-
+      case shoot:
+        shooterL.set(ControlMode.PercentOutput, Const.ShooterLeftOut);
+        shooterR.set(ControlMode.PercentOutput, Const.ShooterRightOut);
+        intakeB.set(ControlMode.PercentOutput, 1);
+        intakeF.set(ControlMode.PercentOutput, 1);
     }
   }
   @Override
