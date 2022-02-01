@@ -8,6 +8,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;**/
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 /**import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -23,6 +25,7 @@ VictorSPX dRB, dLB, intakeMotor, intakeF, intakeB;
 DifferentialDrive drive;
 XboxController driveController;
 Arm arm;
+DigitalInput ballSensorF, ballSensorB;
 
   
   
@@ -38,8 +41,11 @@ Arm arm;
     dRB.follow(dRF);
     driveController = new XboxController(Const.DriveController);
     drive = new DifferentialDrive(dLF, dRF);
-    intakeMotor = new VictorSPX(Const.IntakeMotor);
     arm = new Arm();
+    ballSensorF = new DigitalInput(0);
+    ballSensorB = new DigitalInput(1);
+    intakeMotor = new VictorSPX(Const.IntakeMotor);
+
     intakeF = new VictorSPX(11);
     intakeB = new VictorSPX(15);
     shooterL = new WPI_TalonSRX(5);
@@ -109,14 +115,14 @@ IntakeBelt intakeBelt;
     //   arm.armSet(ControlMode.PercentOutput,-0.1);
     // }
 
-
+    // drive train
     double forwardSpeed =driveController.getLeftY();
     double rotationSpeed = driveController.getRightX();
     drive.arcadeDrive(-forwardSpeed,rotationSpeed);
 
+    //intake motor
     double tCL = driveController.getLeftTriggerAxis();
     double tCR = driveController.getRightTriggerAxis();
-    
     if(tCL > Const.Deadband){
       intakeSpeed = IntakeSpeed.in;
     }else if(tCR > Const.Deadband){
@@ -135,6 +141,11 @@ IntakeBelt intakeBelt;
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
         break;
     }
+    
+    
+    //intake belt using sensors 
+    boolean SF = ballSensorF.get();
+    boolean SB = ballSensorB.get();
 
     if (driveController.getLeftBumper()){
       intakeBelt = IntakeBelt.out;
@@ -158,6 +169,7 @@ IntakeBelt intakeBelt;
 
     }
     
+    //shooter motor
     if (driveController.getLeftBumper()) {
       shooterMotor = ShooterMotor.out;
     }else if(driveController.getRightBumper()) {
@@ -179,7 +191,8 @@ IntakeBelt intakeBelt;
         shooterL.set(ControlMode.PercentOutput, 0);
         break;
     }
-    }
+      
+  }
   @Override
   public void disabledInit() {}
   @Override
