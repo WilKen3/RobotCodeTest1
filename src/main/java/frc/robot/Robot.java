@@ -149,6 +149,12 @@ DigitalInput ballSensorF, ballSensorB;
       shooterR.set(ControlMode.PercentOutput, Const.ShooterRightOut);
       intakeB.set(ControlMode.PercentOutput, 1);
       intakeF.set(ControlMode.PercentOutput, 1);
+    } else {
+      shooterL.set(ControlMode.PercentOutput, 0);
+      shooterR.set(ControlMode.PercentOutput, 0);
+      intakeB.set(ControlMode.PercentOutput, 0);
+      intakeF.set(ControlMode.PercentOutput, 0);
+
     }
   }
   @Override
