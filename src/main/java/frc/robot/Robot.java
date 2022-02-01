@@ -53,28 +53,19 @@ DigitalInput ballSensorF, ballSensorB;
 
     
   }
+  
   @Override
-  public void robotPeriodic(){
-   
-  }
-
+  public void robotPeriodic() {}
+  
   @Override
-  public void autonomousInit() {
-
-  }
+  public void autonomousInit() {}
+  
   @Override
-  public void autonomousPeriodic() {
- 
-    
-    System.out.println(arm.getArmAngle());
-    // arm.ArmPIDMove(45);
-    
-    
-  }
-  @Override
-
-
+public void autonomousPeriodic() {/**System.out.println(arm.getArmAngle());    // arm.ArmPIDMove(45); **/}
+  
+@Override
   public void teleopInit() {}
+  
   enum Intake {
     in,
     out,
@@ -82,7 +73,7 @@ DigitalInput ballSensorF, ballSensorB;
     shoot
   }
   Intake intake;
-  
+
   @Override
   public void teleopPeriodic() {
 
@@ -149,12 +140,16 @@ DigitalInput ballSensorF, ballSensorB;
         intakeF.set(ControlMode.PercentOutput, 1);
     }
   }
+ 
   @Override
   public void disabledInit() {}
+ 
   @Override
   public void disabledPeriodic() {}
+ 
   @Override
   public void testInit() {}
+ 
   @Override
   public void testPeriodic() {}
 }
