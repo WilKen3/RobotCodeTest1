@@ -114,8 +114,8 @@ DigitalInput ballSensorF, ballSensorB;
     switch (intake) {
       case in:
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
-        shooterL.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
-        shooterR.set(ControlMode.PercentOutput, Const.IntakeSpeed);
+        shooterL.set(ControlMode.PercentOutput, Const.IntakeSpeed);
+        shooterR.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
         intakeF.set(ControlMode.PercentOutput, -1);
         if(!SB){
           intakeB.set(ControlMode.PercentOutput, 0);
