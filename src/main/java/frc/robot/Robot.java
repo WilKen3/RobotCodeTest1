@@ -117,10 +117,10 @@ DigitalInput ballSensorF, ballSensorB;
         shooterL.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
         shooterR.set(ControlMode.PercentOutput, Const.IntakeSpeed);
         intakeF.set(ControlMode.PercentOutput, -1);
-        if(SB){
+        if(!SB){
           intakeB.set(ControlMode.PercentOutput, 0);
           intakeF.set(ControlMode.PercentOutput, 0);
-        } else if(SF) {
+        } else if(!SF) {
           intakeB.set(ControlMode.PercentOutput, -1);
         } else {
           intakeB.set(ControlMode.PercentOutput, 0);
