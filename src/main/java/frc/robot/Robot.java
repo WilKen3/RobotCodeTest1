@@ -89,7 +89,7 @@ DigitalInput ballSensorF, ballSensorB;
     boolean APression = driveController.getAButton();
     System.out.println(APression);
     if(APression) {
-      arm.ArmPIDMove(Const.SetAngle);
+      arm.ArmPIDMove(0);
     }else {
       arm.ArmRelease();
     }
@@ -109,12 +109,12 @@ DigitalInput ballSensorF, ballSensorB;
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
         shooterL.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
         shooterR.set(ControlMode.PercentOutput, Const.IntakeSpeed);
+        intakeF.set(ControlMode.PercentOutput, -1);
         if(SB){
           intakeB.set(ControlMode.PercentOutput, 0);
           intakeF.set(ControlMode.PercentOutput, 0);
         } else if(SF) {
           intakeB.set(ControlMode.PercentOutput, -1);
-          intakeF.set(ControlMode.PercentOutput, -1);
         } else {
           intakeB.set(ControlMode.PercentOutput, 0);
           intakeF.set(ControlMode.PercentOutput, 0);
