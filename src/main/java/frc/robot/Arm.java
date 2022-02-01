@@ -1,4 +1,5 @@
 package frc.robot;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -17,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; **/
 public class Arm {
     private SensorCollection armPoint;
     private WPI_TalonSRX armMotor;
+    
 
     Arm(){
         armMotor = new WPI_TalonSRX(Const.ArmMotor);

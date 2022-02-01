@@ -18,14 +18,15 @@ import edu.wpi.first.wpilibj.drive.
 DifferentialDrive;
 
 public class Robot extends TimedRobot {
-WPI_TalonSRX dRF, dLF, shooterL, shooterR;
+Robot robot;
+WPI_TalonSRX dRF, dLF;
 VictorSPX dRB, dLB, intakeMotor, intakeF, intakeB; 
 DifferentialDrive drive;
 XboxController driveController;
 Arm arm;
 DigitalInput ballSensorF, ballSensorB;
 
-  
+
   
   @Override
   public void robotInit() {
@@ -46,11 +47,7 @@ DigitalInput ballSensorF, ballSensorB;
 
     intakeF = new VictorSPX(11);
     intakeB = new VictorSPX(15);
-    shooterL = new WPI_TalonSRX(5);
-    shooterR = new WPI_TalonSRX(4);
-    shooterL.config_kP(0, 6, 30);
-    shooterR.config_kP(0, 6, 30);
-
+    
     
   }
   
@@ -66,7 +63,7 @@ public void autonomousPeriodic() {/**System.out.println(arm.getArmAngle());    /
 @Override
   public void teleopInit() {}
   
-  enum Intake {
+  public enum Intake {
     in,
     out,
     neutral,
@@ -108,8 +105,7 @@ public void autonomousPeriodic() {/**System.out.println(arm.getArmAngle());    /
     switch (intake) {
       case in:
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
-        shooterL.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
-        shooterR.set(ControlMode.PercentOutput, Const.IntakeSpeed);
+        
         intakeF.set(ControlMode.PercentOutput, -1);
         if(!SB){
           intakeB.set(ControlMode.PercentOutput, 0);
@@ -121,21 +117,18 @@ public void autonomousPeriodic() {/**System.out.println(arm.getArmAngle());    /
         break;
       case out:
         intakeMotor.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
-        shooterL.set(ControlMode.PercentOutput, -Const.OuttakeSpeed);
-        shooterR.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
+        
         intakeB.set(ControlMode.PercentOutput, 1);
         intakeF.set(ControlMode.PercentOutput, 1);
         break;
       case neutral:
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
-        shooterL.set(ControlMode.PercentOutput, Const.IntakeNeutral);
-        shooterR.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+        
         intakeB.set(ControlMode.PercentOutput, Const.IntakeNeutral);
         intakeF.set(ControlMode.PercentOutput, Const.IntakeNeutral);
         break;    
       case shoot:
-        shooterL.set(ControlMode.PercentOutput, Const.ShooterLeftOut);
-        shooterR.set(ControlMode.PercentOutput, Const.ShooterRightOut);
+        
         intakeB.set(ControlMode.PercentOutput, 1);
         intakeF.set(ControlMode.PercentOutput, 1);
     }
