@@ -1,14 +1,13 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-// import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-// import com.ctre.phoenix.motorcontrol.SensorCollection;
-//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-/**import com.ctre.phoenix.motorcontrol.*;
+/**import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+ import com.ctre.phoenix.motorcontrol.SensorCollection;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;**/
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -17,7 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; **/
 import edu.wpi.first.wpilibj.drive.
 
 DifferentialDrive;
-
 
 public class Robot extends TimedRobot {
 WPI_TalonSRX dRF, dLF, shooterL, shooterR;
@@ -74,6 +72,8 @@ DigitalInput ballSensorF, ballSensorB;
     
   }
   @Override
+
+
   public void teleopInit() {}
   enum Intake {
     in,
@@ -107,13 +107,49 @@ DigitalInput ballSensorF, ballSensorB;
     switch (intake) {
       case in:
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
-        shooterL.set(ControlMode.PercentOutput, Const.IntakeSpeed);
+        shooterL.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
         shooterR.set(ControlMode.PercentOutput, Const.IntakeSpeed);
-    
-    
+        if(SB){
+          intakeB.set(ControlMode.PercentOutput, 0);
+          intakeF.set(ControlMode.PercentOutput, 0);
+        } else if(SF) {
+          intakeB.set(ControlMode.PercentOutput, -1);
+          intakeF.set(ControlMode.PercentOutput, -1);
+        } else {
+          intakeB.set(ControlMode.PercentOutput, 0);
+          intakeF.set(ControlMode.PercentOutput, 0);
+        }
+        break;
+      case out:
+        intakeMotor.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
+        shooterL.set(ControlMode.PercentOutput, -Const.OuttakeSpeed);
+        shooterR.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
+        intakeB.set(ControlMode.PercentOutput, 1);
+        intakeF.set(ControlMode.PercentOutput, 1);
+        break;
+      case neutral:
+        intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+        shooterL.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+        shooterR.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+        intakeB.set(ControlMode.PercentOutput, 0);
+        intakeF.set(ControlMode.PercentOutput, 0);
+        break;    
     }
-   
-
+    if(driveController.getRightBumper()){
+      intake = Intake.in;
+    } else if(driveController.getLeftBumper()){
+      intake = Intake.out;
+    } else {
+      intake = Intake.neutral;
+    }
+    
+    //shooter
+    if(driveController.getLeftTriggerAxis()>0.3){
+      shooterL.set(ControlMode.PercentOutput, Const.ShooterLeftOut);
+      shooterR.set(ControlMode.PercentOutput, Const.ShooterRightOut);
+      intakeB.set(ControlMode.PercentOutput, 1);
+      intakeF.set(ControlMode.PercentOutput, 1);
+    }
   }
   @Override
   public void disabledInit() {}
