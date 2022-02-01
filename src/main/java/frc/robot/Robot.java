@@ -108,8 +108,8 @@ public void autonomousPeriodic() {/**System.out.println(arm.getArmAngle());    /
     switch (intake) {
       case in:
         intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);
-        shooterL.set(ControlMode.PercentOutput, Const.IntakeSpeed);
-        shooterR.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
+        shooterL.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
+        shooterR.set(ControlMode.PercentOutput, Const.IntakeSpeed);
         intakeF.set(ControlMode.PercentOutput, -1);
         if(!SB){
           intakeB.set(ControlMode.PercentOutput, 0);
@@ -121,8 +121,8 @@ public void autonomousPeriodic() {/**System.out.println(arm.getArmAngle());    /
         break;
       case out:
         intakeMotor.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
-        shooterL.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
-        shooterR.set(ControlMode.PercentOutput, -Const.OuttakeSpeed);
+        shooterL.set(ControlMode.PercentOutput, -Const.OuttakeSpeed);
+        shooterR.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
         intakeB.set(ControlMode.PercentOutput, 1);
         intakeF.set(ControlMode.PercentOutput, 1);
         break;

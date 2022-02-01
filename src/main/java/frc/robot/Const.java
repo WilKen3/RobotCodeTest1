@@ -10,10 +10,9 @@ public class Const {
     public static final int IntakeMotor = 14;
     public static final int ArmMotor = 3;
     // Deadband and intakemotor
-    
     public static final double Deadband = 0.03;
-    public static final double IntakeSpeed = 0.3;
-    public static final double OuttakeSpeed = -0.3;
+    public static final double IntakeSpeed = -0.3;
+    public static final double OuttakeSpeed = 0.3;
     public static final double IntakeNeutral = 0;
     public static final double ShooterLeftOut = -0.7;
     public static final double ShooterRightOut = 0.7;
