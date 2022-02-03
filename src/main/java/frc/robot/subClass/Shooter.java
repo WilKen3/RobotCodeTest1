@@ -23,13 +23,13 @@ public class Shooter {
     shooterL.config_kP(0, 10, 30);
     shooterL.config_kI(0, 0.02,30);
     shooterL.config_kD(0,6,30);
-    shooterL.configMaxIntegralAccumulator(0, 30000,30);
+    //shooterL.configMaxIntegralAccumulator(0, 30000,30);
 
     shooterR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
     shooterR.config_kP(0, 10, 30);
     shooterR.config_kI(0, 0.02,30);
     shooterR.config_kD(0,6,30);
-    shooterR.configMaxIntegralAccumulator(0, 30000,30);
+    //shooterR.configMaxIntegralAccumulator(0, 30000,30);
     
 
     intakeMotor = new VictorSPX(Const.IntakeMotor);
@@ -69,8 +69,8 @@ public class Shooter {
   }
 
   public void shoot(){
-    shooterL.set(ControlMode.PercentOutput, Const.ShooterLeftOut);
-    shooterR.set(ControlMode.PercentOutput, Const.ShooterRightOut);
+    shooterL.set(ControlMode.Velocity, 70000);
+    shooterR.set(ControlMode.Velocity, 70000);
     
     intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
 
