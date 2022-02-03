@@ -25,11 +25,11 @@ Shooter shooter;
 State state;
 Arm arm;
 Drive drive;
-XboxController driveController;
+//XboxController driveController;
   
   @Override
   public void robotInit() {
-    driveController = new XboxController(Const.DriveController);
+    //driveController = new XboxController(Const.DriveController);
     arm = new Arm();
     shooter = new Shooter();
     state = new State();    
@@ -62,7 +62,7 @@ XboxController driveController;
 
     // drive train
     
-    drive.drive(state.forwardSpeed, state.rotationSpeed);
+    //drive.drive(state.forwardSpeed, state.rotationSpeed);
    
     //intake belt using sensors 
     
