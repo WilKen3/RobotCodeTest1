@@ -25,11 +25,11 @@ Shooter shooter;
 State state;
 Arm arm;
 Drive drive;
-//XboxController driveController;
+XboxController driveController;
   
   @Override
   public void robotInit() {
-    //driveController = new XboxController(Const.DriveController);
+    driveController = new XboxController(Const.DriveController);
     arm = new Arm();
     shooter = new Shooter();
     state = new State();    
