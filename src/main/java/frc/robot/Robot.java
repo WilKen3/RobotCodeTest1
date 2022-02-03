@@ -76,6 +76,7 @@ XboxController driveController;
         state.intake = State.Intake.neutral;
       }
     shooter.applyState(state.intake);
+    System.out.println(shooter.getVelocityL()-shooter.getVelocityR());
 
 
   }
