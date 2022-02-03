@@ -45,6 +45,7 @@ XboxController driveController;
   
   @Override
   public void teleopInit() {}
+
   
   @Override
   public void teleopPeriodic() {
@@ -64,6 +65,7 @@ XboxController driveController;
    
     //intake belt using sensors 
     
+
       if(driveController.getRightBumper()){
         state.intake = State.Intake.in;
       } else if(driveController.getLeftBumper()){
@@ -74,6 +76,7 @@ XboxController driveController;
         state.intake = State.Intake.neutral;
       }
     shooter.applyState(state.intake);
+
 
   }
  
