@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**import com.ctre.phoenix.motorcontrol.FeedbackDevice;
  import com.ctre.phoenix.motorcontrol.SensorCollection;
@@ -76,9 +77,10 @@ XboxController driveController;
         state.intake = State.Intake.neutral;
       }
     shooter.applyState(state.intake);
-    System.out.println(shooter.getVelocityL()-shooter.getVelocityR());
 
-
+    SmartDashboard.putNumber("VelocityL", shooter.getVelocityL());
+    SmartDashboard.putNumber("VelocityR", shooter.getVelocityR());
+    
   }
  
   @Override
