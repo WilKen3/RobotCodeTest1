@@ -26,7 +26,7 @@ public class Shooter {
     //shooterL.configMaxIntegralAccumulator(0, 30000,30);
 
     shooterR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
-    shooterR.config_kP(0, 10, 30);
+    shooterR.config_kP(0, 9, 30);
     shooterR.config_kI(0, 0.02,30);
     shooterR.config_kD(0,6,30);
     //shooterR.configMaxIntegralAccumulator(0, 30000,30);
