@@ -20,15 +20,15 @@ public class Shooter {
     shooterR = new WPI_TalonSRX(4);
 
     shooterL.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
-    shooterL.config_kP(0, 10, 30);
+    shooterL.config_kP(0, 0.01, 30);
     shooterL.config_kI(0, 0.02,30);
-    shooterL.config_kD(0,6,30);
+    shooterL.config_kD(0,2,30);
     //shooterL.configMaxIntegralAccumulator(0, 30000,30);
 
     shooterR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
-    shooterR.config_kP(0, 8, 30);
+    shooterR.config_kP(0, 0.01, 30);
     shooterR.config_kI(0, 0.02,30);
-    shooterR.config_kD(0,6,30);
+    shooterR.config_kD(0,2,30);
     //shooterR.configMaxIntegralAccumulator(0, 30000,30);
     
 
