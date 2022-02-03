@@ -80,7 +80,7 @@ XboxController driveController;
 
     SmartDashboard.putNumber("VelocityL", shooter.getVelocityL());
     SmartDashboard.putNumber("VelocityR", shooter.getVelocityR());
-    
+    SmartDashboard.putNumber("VelocityDiff",shooter.getVelocityL()-shooter.getVelocityR());
   }
  
   @Override
