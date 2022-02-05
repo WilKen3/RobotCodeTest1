@@ -20,15 +20,15 @@ public class Shooter {
     shooterR = new WPI_TalonSRX(4);
 
     shooterL.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
-    shooterL.config_kP(0, Const.kPshooter, 30);
-    shooterL.config_kI(0, Const.kIshooter,30);
-    shooterL.config_kD(0,Const.kDshooter,30);
+    shooterL.config_kP(0, Const.kPshooterL, 30);
+    shooterL.config_kI(0, Const.kIshooterL,30);
+    shooterL.config_kD(0,Const.kDshooterL,30);
     //shooterL.configMaxIntegralAccumulator(0, 30000,30);
 
     shooterR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
-    shooterR.config_kP(0, Const.kPshooter, 30);
-    shooterR.config_kI(0, Const.kIshooter,30);
-    shooterR.config_kD(0,Const.kDshooter,30);
+    shooterR.config_kP(0, Const.kPshooterR, 30);
+    shooterR.config_kI(0, Const.kIshooterR,30);
+    shooterR.config_kD(0,Const.kDshooterR,30);
     //shooterR.configMaxIntegralAccumulator(0, 30000,30);
     
 
@@ -69,8 +69,8 @@ public class Shooter {
   }
 
   public void shoot(){
-    shooterL.set(ControlMode.Velocity, -70000);
-    shooterR.set(ControlMode.Velocity, 70000);
+    shooterL.set(ControlMode.Velocity, -50000);
+    shooterR.set(ControlMode.Velocity, 50000);
     
     intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
 
