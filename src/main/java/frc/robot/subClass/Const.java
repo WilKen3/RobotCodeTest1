@@ -58,11 +58,11 @@ public class Const {
 
     //PID for shooter
     public static final double kPshooterL = 0.05;
-    public static final double kIshooterL = 0;
+    public static final double kIshooterL = 0.0005;
     public static final double kDshooterL = 0;
 
     public static final double kPshooterR = 0.05;
-    public static final double kIshooterR = 0;
+    public static final double kIshooterR = 0.0005;
     public static final double kDshooterR = 0;
 
 

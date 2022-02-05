@@ -69,8 +69,8 @@ public class Shooter {
   }
 
   public void shoot(){
-    shooterL.set(ControlMode.Velocity, -50000);
-    shooterR.set(ControlMode.Velocity, 50000);
+    shooterL.set(ControlMode.Velocity, -5000);
+    shooterR.set(ControlMode.Velocity, 5000);
     
     intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
 
