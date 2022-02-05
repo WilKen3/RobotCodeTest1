@@ -55,5 +55,11 @@ public class Const {
 
     // 0 又は 1
     public static final int SFSTimeoutMS = 30;
+
+    //PID for shooter
+    public static final double kPshooter = 0;
+    public static final double kIshooter = 0;
+    public static final double kDshooter = 0;
+
     
 }
