@@ -9,11 +9,11 @@ import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;**/
 // import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-// import edu.wpi.first.wpilibj.TimedRobot;
-// import edu.wpi.first.wpilibj.XboxController;
-/**import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; **/
-//import frc.robot.subClass.State.*;
+/**  import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; 
+import frc.robot.subClass.State.*; */
 
 public class Arm {
     private SensorCollection armPoint;
@@ -62,6 +62,6 @@ public class Arm {
     }
    
     public void ArmRelease(){
-        armMotor.set(ControlMode.PercentOutput, Const.ArmFFCoef*Math.cos(Math.toRadians(getArmAngle())));
+        armMotor.set(ControlMode.PercentOutput, Const.ArmFedForCoef*Math.cos(Math.toRadians(getArmAngle())));
     }
 }

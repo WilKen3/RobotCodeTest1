@@ -27,7 +27,7 @@ public class Const {
 
     // Arm, Anti-gravity (Coef = coeffiecient, FF = freefall, G = gravity)
     public static final double ArmGCoef = 0.13;
-    public static final double ArmFFCoef = -0.04;
+    public static final double ArmFedForCoef = 0.03;
 
     // PDIF (V = value)
     public static final int FslotIdx = 0;
