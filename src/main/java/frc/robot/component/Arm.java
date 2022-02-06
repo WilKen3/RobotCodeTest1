@@ -1,4 +1,4 @@
-package frc.robot.subClass;
+package frc.robot.component;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
@@ -9,6 +9,8 @@ import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;**/
 // import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import frc.robot.State.*;
+import frc.robot.subClass.Const;
 /**  import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -46,6 +48,7 @@ public class Arm {
         double pointRange = Const.HighPoint - Const.LowPoint;
         return pointDiff*(angleRange/pointRange) + Const.LowAngle;
         
+
     }
     
     public double getArmAngle() {
@@ -64,4 +67,16 @@ public class Arm {
     public void ArmRelease(){
         armMotor.set(ControlMode.PercentOutput, Const.ArmFedForCoef*Math.cos(Math.toRadians(getArmAngle())));
     }
+
+    public void applyState(ArmState armState){
+        switch(armState){
+            case setAngle:
+                ArmPIDMove(0);
+                break;
+            case release:
+                ArmRelease();
+                break;
+        }
+    }
 }
+

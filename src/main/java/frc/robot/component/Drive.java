@@ -1,7 +1,8 @@
-package frc.robot.subClass;
+package frc.robot.component;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.subClass.Const;
 
 
 
@@ -13,7 +14,7 @@ public class Drive {
   DifferentialDrive drive;
 
   
-  Drive(){
+  public Drive(){
       dRF = new WPI_TalonSRX(Const.DriveRightFront);
       dLF = new WPI_TalonSRX(Const.DriveLeftFront);
       dRB = new VictorSPX(Const.DriveRightBack);
@@ -28,5 +29,4 @@ public class Drive {
     drive.arcadeDrive(-forwardSpeed,rotationSpeed);
   }
     
-
 }

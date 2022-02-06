@@ -2,7 +2,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.component.Arm;
+import frc.robot.component.Drive;
+import frc.robot.component.Shooter;
 
 /**import com.ctre.phoenix.motorcontrol.FeedbackDevice;
  import com.ctre.phoenix.motorcontrol.SensorCollection;
@@ -25,6 +28,7 @@ Shooter shooter;
 State state;
 Arm arm;
 Drive drive;
+ShuffleBoard shuffleBoard;
 XboxController driveController;
   
   @Override
@@ -33,65 +37,42 @@ XboxController driveController;
     arm = new Arm();
     shooter = new Shooter();
     state = new State();    
+    drive = new Drive();
+
   }
   
   @Override
   public void robotPeriodic() {}
-  
   @Override
   public void autonomousInit() {}
-  
   @Override
-  public void autonomousPeriodic() {/**System.out.println(arm.getArmAngle());    // arm.ArmPIDMove(45); **/}
-  
+  public void autonomousPeriodic() {}
   @Override
   public void teleopInit() {}
-
   
   @Override
   public void teleopPeriodic() {
     
     //arm control
-    
-    System.out.println(driveController.getAButton());
-    if(driveController.getAButton()) {
-      arm.ArmPIDMove(0);
-    }else {
-      arm.ArmRelease();
-    }
-
-    // drive train
-    
-    //drive.drive(state.forwardSpeed, state.rotationSpeed);
-   
     //intake belt using sensors 
-    
 
-      if(driveController.getRightBumper()){
-        state.intake = State.Intake.in;
-      } else if(driveController.getLeftBumper()){
-        state.intake = State.Intake.out;
-      } else if(driveController.getLeftTriggerAxis()>0.3){
-        state.intake = State.Intake.shoot;
-      } else {
-        state.intake = State.Intake.neutral;
-      }
+    state.changeState();
+
+    shuffleBoard.ShuffleOutput();
+
     shooter.applyState(state.intake);
 
-    SmartDashboard.putNumber("VelocityL", shooter.getVelocityL());
-    SmartDashboard.putNumber("VelocityR", shooter.getVelocityR());
-    SmartDashboard.putNumber("VelocityDiff",shooter.getVelocityL()+shooter.getVelocityR());
+    arm.applyState(state.armState);
+
+    drive.drive(state.forwardSpeed, state.rotationSpeed);
   }
  
   @Override
   public void disabledInit() {}
- 
   @Override
   public void disabledPeriodic() {}
- 
   @Override
   public void testInit() {}
- 
   @Override
   public void testPeriodic() {}
 }

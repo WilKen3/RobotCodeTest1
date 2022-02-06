@@ -1,11 +1,12 @@
-package frc.robot.subClass;
+package frc.robot.component;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
-import frc.robot.subClass.State.*;
+import frc.robot.State.*;
+import frc.robot.subClass.Const;
 
 
 public class Shooter {
