@@ -27,7 +27,7 @@ public class Const {
 
     // Arm, Anti-gravity (Coef = coeffiecient, FF = freefall, G = gravity)
     public static final double ArmGCoef = 0.13;
-    public static final double ArmFedForCoef = 0.03;
+    public static final double ArmFedForCoef = 0.05;
 
     // PDIF (V = value)
     public static final int FslotIdx = 0;
@@ -59,11 +59,11 @@ public class Const {
     //PID for shooter
     public static final double kPshooterL = 0.05;
     public static final double kIshooterL = 0.0005;
-    public static final double kDshooterL = 0;
+    public static final double kDshooterL = 0.5;
 
     public static final double kPshooterR = 0.05;
     public static final double kIshooterR = 0.0005;
-    public static final double kDshooterR = 0;
+    public static final double kDshooterR = 0.1;
 
 
 }
