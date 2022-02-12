@@ -57,19 +57,19 @@ public class Shooter implements Component {
 
   public void applyState(){
     switch(State.shooterState){
-      case intake:
+      case s_intake:
         intake();
         break;
       
-      case outTake:
+      case s_outTake:
         outtake();
         break;
       
-      case neutral:
+      case s_neutral:
         neutral();
         break;
       
-      case shooter:
+      case s_shooter:
         shoot();
         break;
     }

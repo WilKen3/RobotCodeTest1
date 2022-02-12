@@ -24,26 +24,29 @@ public class State {
         stateReset();
     }
 
-    public static void stateReset() {//set parameters to 0
-      armState = ArmState.k_release;
+    public static void 
+    
+    
+    stateReset() {//set parameters to 0
+      armState = ArmState.s_release;
       armPidTargetAngle = Const.LowAngle;
-      shooterState = ShooterState.neutral;
-      driveState = DriveState.neutral;
+      shooterState = ShooterState.s_neutral;
+      driveState = DriveState.s_neutral;
     }
 
     public enum ArmState {
-      k_armPID,
-      k_release,
+      s_armPID,
+      s_release,
     }
     public enum ShooterState {
-      intake,
-      outTake,
-      shooter,
-      neutral
+      s_intake,
+      s_outTake,
+      s_shooter,
+      s_neutral
     }
     public enum DriveState {
-      mDrive,
-      neutral
+      s_mDrive,
+      s_neutral
     }
 
     public enum Modes {

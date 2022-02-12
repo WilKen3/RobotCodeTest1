@@ -51,7 +51,13 @@ public class Arm implements Component{
 
   public void ArmPIDMove(double Angle) {
       armMotor.set(ControlMode.Position, angleToPoint(Angle),
-      DemandType.ArbitraryFeedForward, Const.ArmGCoef*Math.cos(Math.toRadians(getArmAngle())));
+      DemandType.ArbitraryFeedForward, armOffSet());
+  }
+  
+  public double armOffSet(){
+    double armAngle = getArmAngle();
+    double angleToForce = Math.cos(Math.toRadians(armAngle));
+    return angleToForce*Const.ArmGCoef;
   }
 
   public void ArmRelease(){
@@ -70,10 +76,10 @@ public class Arm implements Component{
 
   public void applyState(){
     switch (State.armState) {
-      case k_armPID:
+      case s_armPID:
         ArmPIDMove(State.armPidTargetAngle);
         break;
-      case k_release:
+      case s_release:
         ArmRelease();
         break;
     }
