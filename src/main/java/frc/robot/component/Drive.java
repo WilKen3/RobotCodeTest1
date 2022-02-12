@@ -2,14 +2,16 @@ package frc.robot.component;
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
 import frc.robot.State;
 import frc.robot.subClass.Const;
 
 public class Drive implements Component {
-  
+
   WPI_TalonSRX dRF, dLF;
-  VictorSPX dRB, dLB; 
+  VictorSPX dRB, dLB;
   DifferentialDrive Ddrive;
   Drive drive;
 
@@ -18,18 +20,18 @@ public class Drive implements Component {
     dRB = new VictorSPX(Const.DriveRightBack);
     dLF = new WPI_TalonSRX(Const.DriveLeftFront);
     dLB = new VictorSPX(Const.DriveLeftBack);
-    
+
     dRF.setInverted(true);
     dRB.setInverted(true);
     dRB.follow(dRF);
     dLB.follow(dLF);
     Ddrive = new DifferentialDrive(dLF, dRF);
   }
-  
-  
-  
+
+
+
   public void autonomousInit(){}
-    
+
   public void teleopInit(){}
 
   public void disabledInit(){}
@@ -48,9 +50,9 @@ public class Drive implements Component {
         break;
 
 
-      
+
     }
   }
-  
+
 
 }
