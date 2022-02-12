@@ -15,13 +15,14 @@ public class Drive implements Component {
 
   public Drive(){
     dRF = new WPI_TalonSRX(Const.DriveRightFront);
-    dLF = new WPI_TalonSRX(Const.DriveLeftFront);
     dRB = new VictorSPX(Const.DriveRightBack);
+    dLF = new WPI_TalonSRX(Const.DriveLeftFront);
     dLB = new VictorSPX(Const.DriveLeftBack);
-    dLB.follow(dLF);
+    
     dRF.setInverted(true);
     dRB.setInverted(true);
     dRB.follow(dRF);
+    dLB.follow(dLF);
     Ddrive = new DifferentialDrive(dLF, dRF);
   }
   
@@ -39,10 +40,10 @@ public class Drive implements Component {
 
   public void applyState(){
     switch(State.driveState){
-      case mDrive:
+      case s_mDrive:
         Ddrive.arcadeDrive(State.forSpeed, State.sideSpeed);
         break;
-      case neutral:
+      case s_neutral:
         Ddrive.arcadeDrive(0,0);
         break;
 
