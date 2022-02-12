@@ -27,6 +27,8 @@ public class State {
     public static void stateReset() {//set parameters to 0
       armState = ArmState.k_release;
       armPidTargetAngle = Const.LowAngle;
+      shooterState = ShooterState.neutral;
+      driveState = DriveState.neutral;
     }
 
     public enum ArmState {
@@ -53,7 +55,7 @@ public class State {
         }
 
         public void changeMode() {
-            this.mode.changeMode();;
+            this.mode.changeMode();
         }
 
         public void changeState() {
