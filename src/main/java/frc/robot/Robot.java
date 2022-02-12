@@ -1,80 +1,106 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.component.Arm;
-import frc.robot.component.Drive;
-import frc.robot.component.Shooter;
+import java.util.ArrayList;
 
-/**import com.ctre.phoenix.motorcontrol.FeedbackDevice;
- import com.ctre.phoenix.motorcontrol.SensorCollection;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.*;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.drive.
-DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; **/
+import edu.wpi.first.wpilibj.TimedRobot;
+import frc.robot.component.Component;
+import frc.robot.component.Drive;
+import frc.robot.subClass.ExternalSensors;
+
 
 import frc.robot.subClass.*;
 
 public class Robot extends TimedRobot {
 
-Shooter shooter;
-State state;
-Arm arm;
-Drive drive;
-ShuffleBoard shuffleBoard;
-XboxController driveController;
-  
+  ArrayList<Component> components;
+
+  ExternalSensors externalSensors;
+
   @Override
   public void robotInit() {
-    driveController = new XboxController(Const.DriveController);
-    arm = new Arm();
-    shooter = new Shooter();
-    state = new State();    
-    drive = new Drive();
+    components = new ArrayList<>();
+    components.add(new Drive());
 
+    externalSensors = new ExternalSensors();
+
+    State.StateInit();
   }
   
   @Override
   public void robotPeriodic() {}
+  
   @Override
-  public void autonomousInit() {}
+  public void autonomousInit() {
+    for (Component component : components) {
+      component.autonomousInit();
+    }
+  }
+  
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    externalSensors.readExternalSensors();
+    for (Component component : components) {
+      component.readSensors();
+    }
+  }
+  
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    State.mode = State.Modes.k_drive;
+
+    for (Component component : components) {
+      component.teleopInit();
+    }
+  }
   
   @Override
   public void teleopPeriodic() {
-    
-    //arm control
-    //intake belt using sensors 
+    State.stateReset();
 
-    state.changeState();
+    externalSensors.readExternalSensors();
+    for (Component component : components) {
+      component.readSensors();
+    }
 
-    shuffleBoard.ShuffleOutput();
+    State.mode.changeMode();
 
-    shooter.applyState(state.intake);
+    State.mode.changeState();
 
-    arm.applyState(state.armState);
+    for (Component component : components) {
+      component.applyState();
+    }
 
-    drive.drive(state.forwardSpeed, state.rotationSpeed);
   }
  
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    for (Component component : components) {
+      component.disabledInit();
+    }
+  }
+  
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    externalSensors.readExternalSensors();
+    for (Component component : components) {
+      component.readSensors();
+    }
+  }
+ 
   @Override
-  public void testInit() {}
+  public void testInit() {
+    for (Component component : components) {
+      component.testInit();
+    }
+  }
+ 
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    externalSensors.readExternalSensors();
+    for (Component component : components) {
+      component.readSensors();
+    }
+  }
 }
 
 
