@@ -1,7 +1,14 @@
 package frc.robot.subClass;
 
-
 public class Const {
+    //Deadband
+    public static final double Deadband = 0.2;
+
+    //PORTS
+    //ControllerPort(コントローラーのポート)
+    public static final int DriveControllerPort = 0;
+    public static final int OperateControllerPort = 1;
+    
     // motor 
     public static final int DriveRightFront = 2;
     public static final int DriveLeftFront = 6;
@@ -11,8 +18,7 @@ public class Const {
     public static final int IntakeMotor = 14;
     public static final int ArmMotor = 3;
 
-    // Deadband and intakemotor
-    public static final double Deadband = 0.03;
+    // intakemotor
     public static final double IntakeSpeed = -0.3;
     public static final double OuttakeSpeed = 0.3;
     public static final double IntakeNeutral = 0;
@@ -67,3 +73,5 @@ public class Const {
 
 
 }
+
+

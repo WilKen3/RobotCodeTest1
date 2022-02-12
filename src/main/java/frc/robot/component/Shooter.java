@@ -1,20 +1,22 @@
 package frc.robot.component;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
+import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+
+
 import edu.wpi.first.wpilibj.DigitalInput;
-import frc.robot.State.*;
 import frc.robot.subClass.Const;
+import frc.robot.State;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class Shooter {
+public class Shooter implements Component {
   
   private WPI_TalonSRX shooterL, shooterR;
   private VictorSPX intakeMotor, intakeF, intakeB;
   private DigitalInput ballSensorF, ballSensorB;
-  
 
   public Shooter(){
     shooterL = new WPI_TalonSRX(5);
@@ -43,13 +45,23 @@ public class Shooter {
     ballSensorB = new DigitalInput(1);
   }
   
-  public void applyState(Intake intake){
-    switch(intake){
-      case in:
+  public void autonomousInit(){}
+    
+  public void teleopInit(){}
+
+  public void disabledInit(){}
+
+  public void testInit(){}
+
+  public void readSensors(){}
+
+  public void applyState(){
+    switch(State.shooterState){
+      case intake:
         intake();
         break;
       
-      case out:
+      case outTake:
         outtake();
         break;
       
@@ -57,12 +69,14 @@ public class Shooter {
         neutral();
         break;
       
-      case shoot:
+      case shooter:
         shoot();
         break;
     }
-  }
+
   
+}
+
   public double getVelocityR(){
     return(shooterR.getSelectedSensorVelocity(0));
   }
@@ -122,5 +136,3 @@ public class Shooter {
   }
 
 }
-  
-
