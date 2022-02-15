@@ -33,27 +33,37 @@ public class Arm implements Component{
   }
 
   public double pointToAngle(double Point) {
-      double pointDiff = Point - Const.LowPoint;
-      double angleRange = Const.HighAngle - Const.LowAngle;
-      double pointRange = Const.HighPoint - Const.LowPoint;
-      return pointDiff*(angleRange/pointRange) + Const.LowAngle;
+    double pointDiff = Point - Const.LowPoint;
+    double angleRange = Const.HighAngle - Const.LowAngle;
+    double pointRange = Const.HighPoint - Const.LowPoint;
+    return pointDiff*(angleRange/pointRange) + Const.LowAngle;
       
 
   }
 
   public double getArmAngle() {
-      return pointToAngle(armPoint.getAnalogInRaw());
+    return pointToAngle(armPoint.getAnalogInRaw());
   }
 
   public void armSet(ControlMode controlMode, double input) {
-      armMotor.set(controlMode, input);
+    armMotor.set(controlMode, input);
   }
 
   public void ArmPIDMove(double Angle) {
-      armMotor.set(ControlMode.Position, angleToPoint(Angle),
-      DemandType.ArbitraryFeedForward, armOffSet());
+    armMotor.set(ControlMode.Position, angleToPoint(Angle),
+    DemandType.ArbitraryFeedForward, armOffSet());
   }
-  
+
+  public void ArmPercentOutput(double input) {
+    armMotor.set(ControlMode.PercentOutput, input); //shooterMode用
+  }
+  public void ArmKeepPosition() {
+    double currentPosition = armPoint.getAnalogInRaw();
+    armMotor.set(ControlMode.Position, currentPosition, 
+    DemandType.ArbitraryFeedForward, armOffSet());
+
+
+  }
   public double armOffSet(){
     double armAngle = getArmAngle();
     double angleToForce = Math.cos(Math.toRadians(armAngle));
@@ -61,7 +71,7 @@ public class Arm implements Component{
   }
 
   public void ArmRelease(){
-      armMotor.set(ControlMode.PercentOutput, Const.ArmFedForCoef*Math.cos(Math.toRadians(getArmAngle())));
+    armMotor.set(ControlMode.PercentOutput, Const.ArmFedForCoef*Math.cos(Math.toRadians(getArmAngle())));
   }
   
   public void autonomousInit(){}
@@ -82,6 +92,12 @@ public class Arm implements Component{
       case s_release:
         ArmRelease();
         break;
+      case s_keepPosition:
+        ArmKeepPosition();
+        break;
+      case s_percentOutput;
+        //if(
+        } 
     }
   }
 }

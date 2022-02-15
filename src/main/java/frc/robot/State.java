@@ -8,6 +8,7 @@ public class State {
     public static Modes mode;
 
     public static ArmState armState;
+    
     public static ShooterState shooterState;
     public static DriveState driveState;
     public static double armPidTargetAngle;
@@ -37,7 +38,10 @@ public class State {
     public enum ArmState {
       s_armPID,
       s_release,
+      s_keepPosition,
+      s_percentOutput
     }
+    
     public enum ShooterState {
       s_intake,
       s_outTake,
@@ -46,7 +50,12 @@ public class State {
     }
     public enum DriveState {
       s_mDrive,
+      s_sDrive,
       s_neutral
+    }
+    public enum ModeChange{
+      s_driveMode,
+      s_shooterMode
     }
 
     public enum Modes {

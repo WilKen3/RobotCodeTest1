@@ -25,6 +25,9 @@ public class Const {
     public static final double ShooterLeftOut = -0.7;
     public static final double ShooterRightOut = 0.7;
 
+    //driveSpeed
+    public static final double driveSpeedSlow = 0.5;
+    
     // angle to point, point to angle
     public static final int LowAngle = -32;
     public static final int HighAngle = 86;
