@@ -14,7 +14,6 @@ public class Arm implements Component{
   private WPI_TalonSRX armMotor;
   DriveMode dMode;
  
- 
   public Arm(){
     armMotor = new WPI_TalonSRX(Const.ArmMotor);
     armPoint = new SensorCollection(armMotor); 

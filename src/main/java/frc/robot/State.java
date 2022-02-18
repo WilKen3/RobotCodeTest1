@@ -6,9 +6,7 @@ import frc.robot.subClass.Const;
 
 public class State {
     public static Modes mode;
-
     public static ArmState armState;
-    
     public static ShooterState shooterState;
     public static DriveState driveState;
     public static double armPidTargetAngle;
