@@ -2,9 +2,9 @@ package frc.robot.component;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.XboxController;
+
 import frc.robot.State;
-import frc.robot.State.*;
+//import frc.robot.State.*;
 import frc.robot.mode.*;
 import frc.robot.subClass.*;
 import com.ctre.phoenix.motorcontrol.*;
@@ -61,7 +61,7 @@ public class Arm implements Component{
     if(getArmAngle() == -32) {
       return;
     } else{
-      armMotor.set(ControlMode.PercentOutput, input);
+      armMotor.set(ControlMode.PercentOutput, input*Const.ArmControl);
     }
   }
   
@@ -69,7 +69,7 @@ public class Arm implements Component{
     if(getArmAngle() == 89) {
       return;
     } else{
-      armMotor.set(ControlMode.PercentOutput, input);
+      armMotor.set(ControlMode.PercentOutput, input*Const.ArmControl);
     }
   }
 
@@ -113,10 +113,10 @@ public class Arm implements Component{
         ArmKeepPosition();
         break;
       case s_percentOutputUp:
-        //ArmPercentOutputUp(ここにどうコントローラーからinputを入れるか);
+        ArmPercentOutputUp(State.lTrigger);
         break;
       case s_percentOutputDown:
-        //ArmPercentOutputDown(ここにどうコントローラーからinputを入れるか);
+        ArmPercentOutputDown(-State.rTrigger);
         break;
         } 
     }

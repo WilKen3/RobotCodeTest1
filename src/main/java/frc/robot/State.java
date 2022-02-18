@@ -14,6 +14,7 @@ public class State {
     public static double armPidTargetAngle;
     public static double forSpeed;
     public static double sideSpeed;
+    public static double lTrigger, rTrigger;
     
     
     public static void StateInit() {

@@ -25,6 +25,8 @@ public class Const {
     public static final double ShooterLeftOut = -0.7;
     public static final double ShooterRightOut = 0.7;
 
+    public static final double ArmControl = 0.5;
+
     //driveSpeed
     public static final double driveSpeedSlow = 0.5;
     
