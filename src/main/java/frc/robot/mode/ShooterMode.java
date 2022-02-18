@@ -17,13 +17,12 @@ public class ShooterMode extends Mode {
 
     @Override
     public void changeState() {
-        double lTrigger = driveController.getLeftTriggerAxis();
-        double rTrigger = driveController.getRightTriggerAxis();
+         
 
-        if(lTrigger > Const.Deadband) {
-            State.armState = ArmState.s_percentOutput;
-        }else if(rTrigger > Const.Deadband) {
-            State.armState = ArmState.s_percentOutput;
+        if( driveController.getLeftTriggerAxis() > Const.Deadband) {
+            State.armState = ArmState.s_percentOutputUp;
+        }else if(driveController.getRightTriggerAxis() > Const.Deadband) {
+            State.armState = ArmState.s_percentOutputDown;
         }else {
             State.armState = ArmState.s_keepPosition;
         }

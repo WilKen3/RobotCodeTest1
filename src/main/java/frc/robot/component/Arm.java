@@ -2,7 +2,9 @@ package frc.robot.component;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.State;
+import frc.robot.State.*;
 import frc.robot.mode.*;
 import frc.robot.subClass.*;
 import com.ctre.phoenix.motorcontrol.*;
@@ -11,6 +13,7 @@ public class Arm implements Component{
   private SensorCollection armPoint;
   private WPI_TalonSRX armMotor;
   DriveMode dMode;
+ 
  
   public Arm(){
     armMotor = new WPI_TalonSRX(Const.ArmMotor);
@@ -54,9 +57,22 @@ public class Arm implements Component{
     DemandType.ArbitraryFeedForward, armOffSet());
   }
 
-  public void ArmPercentOutput(double input) {
-    armMotor.set(ControlMode.PercentOutput, input); //shooterMode用
+  public void ArmPercentOutputDown(double input) {
+    if(getArmAngle() == -32) {
+      return;
+    } else{
+      armMotor.set(ControlMode.PercentOutput, input);
+    }
   }
+  
+  public void ArmPercentOutputUp(double input) {
+    if(getArmAngle() == 89) {
+      return;
+    } else{
+      armMotor.set(ControlMode.PercentOutput, input);
+    }
+  }
+
   public void ArmKeepPosition() {
     double currentPosition = armPoint.getAnalogInRaw();
     armMotor.set(ControlMode.Position, currentPosition, 
@@ -74,6 +90,7 @@ public class Arm implements Component{
     armMotor.set(ControlMode.PercentOutput, Const.ArmFedForCoef*Math.cos(Math.toRadians(getArmAngle())));
   }
   
+
   public void autonomousInit(){}
     
   public void teleopInit(){}
@@ -95,10 +112,13 @@ public class Arm implements Component{
       case s_keepPosition:
         ArmKeepPosition();
         break;
-      case s_percentOutput;
-        //if(
+      case s_percentOutputUp:
+        //ArmPercentOutputUp(ここにどうコントローラーからinputを入れるか);
+        break;
+      case s_percentOutputDown:
+        //ArmPercentOutputDown(ここにどうコントローラーからinputを入れるか);
+        break;
         } 
     }
   }
-}
 

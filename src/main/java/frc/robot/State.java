@@ -15,6 +15,7 @@ public class State {
     public static double forSpeed;
     public static double sideSpeed;
     
+    
     public static void StateInit() {
         XboxController driveController = new XboxController(Const.DriveControllerPort);
         XboxController operateController = new XboxController(Const.OperateControllerPort);
@@ -39,7 +40,8 @@ public class State {
       s_armPID,
       s_release,
       s_keepPosition,
-      s_percentOutput
+      s_percentOutputUp,
+      s_percentOutputDown
     }
     
     public enum ShooterState {
