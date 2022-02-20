@@ -29,6 +29,7 @@ public class Const {
 
     //driveSpeed
     public static final double driveSpeedSlow = 0.5;
+    public static final double neutral = 0;
     
     // angle to point, point to angle
     public static final int LowAngle = -32;
@@ -62,9 +63,10 @@ public class Const {
     public static final int MIATimeout = 30;
 
     // feedback sensor
+    // 0 又は 1
     public static final int SFSPidIdx = 0;
 
-    // 0 又は 1
+    
     public static final int SFSTimeoutMS = 30;
 
     //PID for shooter
@@ -75,6 +77,7 @@ public class Const {
     public static final double kPshooterR = 0.05;
     public static final double kIshooterR = 0.0005;
     public static final double kDshooterR = 0.1;
+
 
 
 }

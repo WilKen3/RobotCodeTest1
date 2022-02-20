@@ -49,7 +49,7 @@ public class Drive implements Component {
         Ddrive.arcadeDrive(State.forSpeed*Const.driveSpeedSlow, State.sideSpeed*Const.driveSpeedSlow);
         break;
       case s_neutral:
-        Ddrive.arcadeDrive(0,0);
+        Ddrive.arcadeDrive(Const.neutral,Const.neutral);
         break;
 
 

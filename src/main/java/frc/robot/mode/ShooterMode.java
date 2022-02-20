@@ -32,6 +32,11 @@ public class ShooterMode extends Mode {
         State.lTrigger = driveController.getLeftTriggerAxis();
         State.rTrigger = driveController.getRightTriggerAxis();
         
+        if(Math.abs(State.forSpeed) > 0 || Math.abs(State.sideSpeed) > 0){
+            State.driveState = DriveState.s_sDrive;
+          }else {
+            State.driveState = DriveState.s_neutral;
+          }
     }
 
 }
