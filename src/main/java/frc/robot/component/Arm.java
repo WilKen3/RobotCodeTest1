@@ -51,7 +51,7 @@ public class Arm implements Component{
 
   public void ArmPercentOutputDown() {
     if(getArmAngle() == Const.LowAngle) {
-      armMotor.set(ControlMode.PercentOutput, Const.neutral);
+      armMotor.set(ControlMode.PercentOutput, Const.Neutral);
     }else if(getArmAngle() < Const.HorizonAngle) {
       armMotor.set(ControlMode.PercentOutput, Const.ArmFedForCoef*Math.cos(Math.toRadians(getArmAngle())));
     }else {
@@ -61,7 +61,7 @@ public class Arm implements Component{
   
   public void ArmPercentOutputUp(double input) {
     if(getArmAngle() == Const.HighAngle) {
-      armMotor.set(ControlMode.PercentOutput, Const.neutral);
+      armMotor.set(ControlMode.PercentOutput, Const.Neutral);
     } else{
       armMotor.set(ControlMode.PercentOutput, input*Const.ArmControl);
     }

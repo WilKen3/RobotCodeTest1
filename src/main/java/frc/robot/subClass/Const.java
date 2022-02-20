@@ -31,7 +31,6 @@ public class Const {
     // intakemotor
     public static final double IntakeSpeed = -0.3;
     public static final double OuttakeSpeed = 0.3;
-    public static final double IntakeNeutral = 0;
     public static final double ShooterLeftOut = -0.7;
     public static final double ShooterRightOut = 0.7;
 
@@ -39,7 +38,7 @@ public class Const {
 
     //driveSpeed
     public static final double driveSpeedSlow = 0.5;
-    public static final double neutral = 0;
+    public static final double Neutral = 0;
     
     // angle to point, point to angle
     public static final int LowAngle = -32;

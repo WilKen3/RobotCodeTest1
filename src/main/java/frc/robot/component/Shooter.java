@@ -23,12 +23,9 @@ public class Shooter implements Component {
     shooterL = new WPI_TalonSRX(Const.shooterL);
     shooterR = new WPI_TalonSRX(Const.shooterR);
     
-   
     shooterL.configAllSettings(Const.shooterLConfig);
     shooterL.setSelectedSensorPosition(Const.ShooterInitialPosition);
-    
-
-    
+      
     shooterR.configAllSettings(Const.shooterRConfig);
     shooterR.setSelectedSensorPosition(Const.ShooterInitialPosition);
 
@@ -87,7 +84,7 @@ public class Shooter implements Component {
     shooterL.set(ControlMode.Velocity, Const.ShooterSpeedL);
     shooterR.set(ControlMode.Velocity, Const.ShooterSpeedR);
     
-    intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+    intakeMotor.set(ControlMode.PercentOutput, Const.Neutral);
 
     intakeB.set(ControlMode.PercentOutput, Const.PMaxOutput);
     intakeF.set(ControlMode.PercentOutput, Const.PMaxOutput);
@@ -124,13 +121,13 @@ public class Shooter implements Component {
   }
   
   public void neutral(){
-    shooterL.set(ControlMode.PercentOutput, Const.IntakeNeutral);
-    shooterR.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+    shooterL.set(ControlMode.PercentOutput, Const.Neutral);
+    shooterR.set(ControlMode.PercentOutput, Const.Neutral);
 
-    intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+    intakeMotor.set(ControlMode.PercentOutput, Const.Neutral);
 
-    intakeB.set(ControlMode.PercentOutput, Const.IntakeNeutral);
-    intakeF.set(ControlMode.PercentOutput, Const.IntakeNeutral);
+    intakeB.set(ControlMode.PercentOutput, Const.Neutral);
+    intakeF.set(ControlMode.PercentOutput, Const.Neutral);
   }
 
 }

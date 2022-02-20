@@ -29,7 +29,7 @@ public class Drive implements Component {
     Ddrive = new DifferentialDrive(dLF, dRF);
    
     dRF.configAllSettings(Const.dRConfig);
-    dRF.configAllSettings(Const.dRConfig);
+    dLF.configAllSettings(Const.dLConfig);
   }
 
   public void autonomousInit(){}
@@ -54,7 +54,7 @@ public class Drive implements Component {
         Ddrive.arcadeDrive(State.forSpeed*Const.driveSpeedSlow, State.sideSpeed*Const.driveSpeedSlow);
         break;
       case s_neutral:
-        Ddrive.arcadeDrive(Const.neutral,Const.neutral);
+        Ddrive.arcadeDrive(Const.Neutral,Const.Neutral);
         break;
 
 

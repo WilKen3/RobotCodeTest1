@@ -31,10 +31,7 @@ public class State {
         stateReset();
     }
 
-    public static void 
-    
-    
-    stateReset() {//set parameters to 0
+    public static void stateReset() {//set parameters to 0
       armState = ArmState.s_release;
       armPidTargetAngle = Const.LowAngle;
       shooterState = ShooterState.s_neutral;
