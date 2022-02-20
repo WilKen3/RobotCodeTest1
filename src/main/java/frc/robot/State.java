@@ -59,6 +59,11 @@ public class State {
       s_shooterMode
     }
 
+    public enum operatingMode{
+      m_drive,
+      m_shooter
+    }
+
     public enum Modes {
         k_drive(new DriveMode());  //k_drive(parameter), the parameter is a constructor of DriveMode.java
                                    //complicating enums require a semi-colon at the end
