@@ -10,8 +10,11 @@ public class ShooterMode extends Mode {
 
     @Override
     public void changeMode() {
-
-
+        if(driveController.getBackButton()) {
+            State.mode = Modes.k_drive;
+            } else{
+            State.mode = Modes.k_shooter;
+        }
 
     }
     

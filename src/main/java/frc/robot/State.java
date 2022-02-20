@@ -9,6 +9,7 @@ public class State {
     public static ArmState armState;
     public static ShooterState shooterState;
     public static DriveState driveState;
+    //public static OperatingMode opertaingMode;
     public static double armPidTargetAngle;
     public static double forSpeed;
     public static double sideSpeed;
@@ -59,16 +60,22 @@ public class State {
       s_shooterMode
     }
 
-    public enum operatingMode{
-      m_drive,
-      m_shooter
-    }
+    // public enum OperatingMode{
+    //   m_drive,
+    //   m_shooter
+    // }
 
     public enum Modes {
-        k_drive(new DriveMode());  //k_drive(parameter), the parameter is a constructor of DriveMode.java
-                                   //complicating enums require a semi-colon at the end
-        private final Mode mode;   //gives name to Mode(class)
-        Modes(Mode mode) {         //
+      /** k_drive(parameter), the parameter is a constructor of DriveMode.java
+       * complicating enums require a semi-colon at the end
+       * gives name to Mode(class)
+      */
+        k_drive(new DriveMode()),
+        k_shooter(new ShooterMode());
+
+        private final Mode mode;   
+
+        Modes(Mode mode) {         
            this.mode = mode;
         }
 

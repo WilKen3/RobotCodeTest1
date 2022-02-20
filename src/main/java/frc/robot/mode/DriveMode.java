@@ -7,6 +7,11 @@ public class DriveMode extends Mode {
 
     @Override
     public void changeMode() {
+      if(driveController.getStartButton()) {
+        State.mode = Modes.k_shooter;
+      } else{
+        State.mode = Modes.k_drive;
+      }
 
     }
 
