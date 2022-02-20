@@ -14,7 +14,7 @@ public class State {
     public static double shooterLspeed, shooterRspeed;
     public static double dRFSpeed, dLFSpeed;
     public static double forSpeed, sideSpeed;
-    public static double leftTriggerOutput, rightTriggerOutput;
+    public static double ArmOutputUp, ArmOutputDown;
     
     
     public static void StateInit() {

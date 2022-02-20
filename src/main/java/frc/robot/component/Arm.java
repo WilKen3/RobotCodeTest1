@@ -54,11 +54,13 @@ public class Arm implements Component{
     DemandType.ArbitraryFeedForward, armOffSet());
   }
 
-  public void ArmPercentOutputDown(double input) {
+  public void ArmPercentOutputDown() {
     if(getArmAngle() == Const.LowAngle) {
       armMotor.set(ControlMode.PercentOutput, Const.neutral);
-    } else{
-      armMotor.set(ControlMode.PercentOutput, input*Const.ArmControl);
+    }else if(getArmAngle() < Const.HorizonAngle) {
+      armMotor.set(ControlMode.PercentOutput, Const.ArmFedForCoef*Math.cos(Math.toRadians(getArmAngle())));
+    }else {
+      armMotor.set(ControlMode.PercentOutput, Const.ArmDown*Math.cos(Math.toRadians(getArmAngle())));
     }
   }
   
@@ -113,13 +115,12 @@ public class Arm implements Component{
         ArmKeepPosition();
         break;
       case s_percentOutputUp:
-        ArmPercentOutputUp(State.leftTriggerOutput);
+        ArmPercentOutputUp(State.ArmOutputUp);
         break;
       case s_percentOutputDown:
-        ArmPercentOutputDown(-State.rightTriggerOutput);
+        ArmPercentOutputDown();
         break;
         } 
     }
-  
   }
 

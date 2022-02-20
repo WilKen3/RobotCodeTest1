@@ -10,15 +10,20 @@ public class Const {
     public static final int OperateControllerPort = 1;
     
     // motor 
+    public static final int DriveController = 0;
     public static final int DriveRightFront = 2;
     public static final int DriveLeftFront = 6;
     public static final int DriveRightBack = 12;
     public static final int DriveLeftBack = 13;
-    public static final int DriveController = 0;
+    
     public static final int IntakeMotor = 14;
+    public static final int IntakeBeltF = 0;
+    public static final int IntakeBeltB = 1;
     public static final int ArmMotor = 3;
-    public static final int shooterL = 5;
     public static final int shooterR = 4;
+    public static final int shooterL = 5;
+
+    
 
     // intakemotor
     public static final double IntakeSpeed = -0.3;
@@ -36,12 +41,14 @@ public class Const {
     // angle to point, point to angle
     public static final int LowAngle = -32;
     public static final int HighAngle = 86;
+    public static final int HorizonAngle = 0;
     public static final int LowPoint = 181;
     public static final int HighPoint = 516;
 
     // Arm, Anti-gravity (Coef = coeffiecient, FF = freefall, G = gravity)
     public static final double ArmGCoef = 0.13;
     public static final double ArmFedForCoef = 0.05;
+    public static final double ArmDown = 0.01;
 
     // PDIF (V = value)
     public static final int FslotIdx = 0;

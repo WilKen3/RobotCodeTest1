@@ -44,8 +44,8 @@ public class Shooter implements Component {
 
     intakeF = new VictorSPX(11);
     intakeB = new VictorSPX(15);
-    ballSensorF = new DigitalInput(0);
-    ballSensorB = new DigitalInput(1);
+    ballSensorF = new DigitalInput(Const.IntakeBeltF);
+    ballSensorB = new DigitalInput(Const.IntakeBeltB);
   }
   
   public void autonomousInit(){}
