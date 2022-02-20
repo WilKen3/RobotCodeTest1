@@ -21,7 +21,8 @@ public class ShooterMode extends Mode {
     @Override
     public void changeState() {
         
-
+        State.lTrigger = driveController.getLeftTriggerAxis();
+        State.rTrigger = driveController.getRightTriggerAxis();
         if( driveController.getLeftTriggerAxis() > Const.Deadband) {
             State.armState = ArmState.s_percentOutputUp;
         }else if(driveController.getRightTriggerAxis() > Const.Deadband) {
@@ -29,9 +30,9 @@ public class ShooterMode extends Mode {
         }else {
             State.armState = ArmState.s_keepPosition;
         }
-        State.lTrigger = driveController.getLeftTriggerAxis();
-        State.rTrigger = driveController.getRightTriggerAxis();
-        
+       
+        State.forSpeed = driveController.getLeftY();
+        State.sideSpeed = driveController.getRightX();
         if(Math.abs(State.forSpeed) > 0 || Math.abs(State.sideSpeed) > 0){
             State.driveState = DriveState.s_sDrive;
           }else {

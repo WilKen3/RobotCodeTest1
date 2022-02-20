@@ -3,8 +3,10 @@ package frc.robot;
 import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import frc.robot.component.*;
+
 import frc.robot.component.Component;
-import frc.robot.component.Drive;
+
 import frc.robot.subClass.ExternalSensors;
 
 
@@ -20,6 +22,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     components = new ArrayList<>();
     components.add(new Drive());
+    components.add(new Arm());
+    components.add(new Shooter());
 
     externalSensors = new ExternalSensors();
 
