@@ -17,6 +17,8 @@ public class Const {
     public static final int DriveController = 0;
     public static final int IntakeMotor = 14;
     public static final int ArmMotor = 3;
+    public static final int shooterL = 5;
+    public static final int shooterR = 4;
 
     // intakemotor
     public static final double IntakeSpeed = -0.3;
@@ -65,6 +67,7 @@ public class Const {
     // feedback sensor
     // 0 又は 1
     public static final int SFSPidIdx = 0;
+    public static final int ShooterInitialPosition = 0;
 
     
     public static final int SFSTimeoutMS = 30;

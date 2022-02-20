@@ -1,7 +1,5 @@
 package frc.robot.mode;
 
-
-//import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.State;
 import frc.robot.State.*;
 import frc.robot.subClass.Const;
@@ -21,8 +19,8 @@ public class ShooterMode extends Mode {
     @Override
     public void changeState() {
         
-        State.lTrigger = driveController.getLeftTriggerAxis();
-        State.rTrigger = driveController.getRightTriggerAxis();
+        State.leftTriggerOutput = driveController.getLeftTriggerAxis();
+        State.rightTriggerOutput = driveController.getRightTriggerAxis();
         if( driveController.getLeftTriggerAxis() > Const.Deadband) {
             State.armState = ArmState.s_percentOutputUp;
         }else if(driveController.getRightTriggerAxis() > Const.Deadband) {

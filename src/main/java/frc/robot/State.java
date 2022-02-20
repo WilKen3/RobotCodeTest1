@@ -9,11 +9,12 @@ public class State {
     public static ArmState armState;
     public static ShooterState shooterState;
     public static DriveState driveState;
-    //public static OperatingMode opertaingMode;
     public static double armPidTargetAngle;
-    public static double forSpeed;
-    public static double sideSpeed;
-    public static double lTrigger, rTrigger;
+    public static double armAngle;
+    public static double shooterLspeed, shooterRspeed;
+    public static double dRFSpeed, dLFSpeed;
+    public static double forSpeed, sideSpeed;
+    public static double leftTriggerOutput, rightTriggerOutput;
     
     
     public static void StateInit() {
@@ -55,15 +56,6 @@ public class State {
       s_sDrive,
       s_neutral
     }
-    public enum ModeChange{
-      s_driveMode,
-      s_shooterMode
-    }
-
-    // public enum OperatingMode{
-    //   m_drive,
-    //   m_shooter
-    // }
 
     public enum Modes {
       /** k_drive(parameter), the parameter is a constructor of DriveMode.java

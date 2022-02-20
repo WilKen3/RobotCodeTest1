@@ -17,23 +17,26 @@ public class Shooter implements Component {
   private WPI_TalonSRX shooterL, shooterR;
   private VictorSPX intakeMotor, intakeF, intakeB;
   private DigitalInput ballSensorF, ballSensorB;
+  //private SensorCollection shooterLsensor, shooterRsensor;
 
   public Shooter(){
-    shooterL = new WPI_TalonSRX(5);
-    shooterR = new WPI_TalonSRX(4);
-
-    shooterL.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
-    shooterL.setSelectedSensorPosition(0);
-    shooterL.config_kP(0, Const.kPshooterL, 30);
-    shooterL.config_kI(0, Const.kIshooterL,30);
-    shooterL.config_kD(0,Const.kDshooterL,30);
+    shooterL = new WPI_TalonSRX(Const.shooterL);
+    shooterR = new WPI_TalonSRX(Const.shooterR);
+    
+    //shooterLsensor = new SensorCollection(shooterL);
+    shooterL.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Const.SFSPidIdx, Const.SFSTimeoutMS);
+    shooterL.setSelectedSensorPosition(Const.ShooterInitialPosition);
+    shooterL.config_kP(Const.PslotIdx, Const.kPshooterL, Const.SFSTimeoutMS);
+    shooterL.config_kI(Const.IslotIdx, Const.kIshooterL, Const.SFSTimeoutMS);
+    shooterL.config_kD(Const.DslotIdx, Const.kDshooterL, Const.SFSTimeoutMS);
     //shooterL.configMaxIntegralAccumulator(0, 30000,30);
 
-    shooterR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
-    shooterR.setSelectedSensorPosition(0);
-    shooterR.config_kP(0, Const.kPshooterR, 30);
-    shooterR.config_kI(0, Const.kIshooterR,30);
-    shooterR.config_kD(0,Const.kDshooterR,30);
+    // shooterRsensor = new SensorCollection(shooterR);
+    shooterR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Const.SFSPidIdx, Const.SFSTimeoutMS);
+    shooterR.setSelectedSensorPosition(Const.ShooterInitialPosition);
+    shooterR.config_kP(Const.PslotIdx, Const.kPshooterR, Const.SFSTimeoutMS);
+    shooterR.config_kI(Const.IslotIdx, Const.kIshooterR, Const.SFSTimeoutMS);
+    shooterR.config_kD(Const.DslotIdx, Const.kDshooterR, Const.SFSTimeoutMS);
     //shooterR.configMaxIntegralAccumulator(0, 30000,30);
     
 
@@ -53,7 +56,10 @@ public class Shooter implements Component {
 
   public void testInit(){}
 
-  public void readSensors(){}
+  public void readSensors(){
+    State.shooterLspeed = getVelocityL();
+    State.shooterRspeed = getVelocityR();
+  }
 
   public void applyState(){
     switch(State.shooterState){

@@ -4,15 +4,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
 import frc.robot.State;
-//import frc.robot.State.*;
-import frc.robot.mode.*;
 import frc.robot.subClass.*;
 import com.ctre.phoenix.motorcontrol.*;
 
 public class Arm implements Component{
   private SensorCollection armPoint;
   private WPI_TalonSRX armMotor;
-  DriveMode dMode;
+  
  
   public Arm(){
     armMotor = new WPI_TalonSRX(Const.ArmMotor);
@@ -57,16 +55,16 @@ public class Arm implements Component{
   }
 
   public void ArmPercentOutputDown(double input) {
-    if(getArmAngle() == -32) {
-      return;
+    if(getArmAngle() == Const.LowAngle) {
+      armMotor.set(ControlMode.PercentOutput, Const.neutral);
     } else{
       armMotor.set(ControlMode.PercentOutput, input*Const.ArmControl);
     }
   }
   
   public void ArmPercentOutputUp(double input) {
-    if(getArmAngle() == 89) {
-      return;
+    if(getArmAngle() == Const.HighAngle) {
+      armMotor.set(ControlMode.PercentOutput, Const.neutral);
     } else{
       armMotor.set(ControlMode.PercentOutput, input*Const.ArmControl);
     }
@@ -79,6 +77,7 @@ public class Arm implements Component{
 
 
   }
+ 
   public double armOffSet(){
     double armAngle = getArmAngle();
     double angleToForce = Math.cos(Math.toRadians(armAngle));
@@ -89,7 +88,6 @@ public class Arm implements Component{
     armMotor.set(ControlMode.PercentOutput, Const.ArmFedForCoef*Math.cos(Math.toRadians(getArmAngle())));
   }
   
-
   public void autonomousInit(){}
     
   public void teleopInit(){}
@@ -98,7 +96,10 @@ public class Arm implements Component{
 
   public void testInit(){}
 
-  public void readSensors(){}
+  public void readSensors(){
+    State.armAngle = getArmAngle();
+    
+  }
 
   public void applyState(){
     switch (State.armState) {
@@ -112,12 +113,13 @@ public class Arm implements Component{
         ArmKeepPosition();
         break;
       case s_percentOutputUp:
-        ArmPercentOutputUp(State.lTrigger);
+        ArmPercentOutputUp(State.leftTriggerOutput);
         break;
       case s_percentOutputDown:
-        ArmPercentOutputDown(-State.rTrigger);
+        ArmPercentOutputDown(-State.rightTriggerOutput);
         break;
         } 
     }
+  
   }
 

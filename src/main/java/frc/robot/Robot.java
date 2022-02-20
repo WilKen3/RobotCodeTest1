@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.component.*;
-
 import frc.robot.component.Component;
 
 import frc.robot.subClass.ExternalSensors;
@@ -17,13 +16,14 @@ public class Robot extends TimedRobot {
   ArrayList<Component> components;
 
   ExternalSensors externalSensors;
-
+  
   @Override
   public void robotInit() {
     components = new ArrayList<>();
     components.add(new Drive());
     components.add(new Arm());
     components.add(new Shooter());
+  
 
     externalSensors = new ExternalSensors();
 
@@ -55,6 +55,7 @@ public class Robot extends TimedRobot {
     for (Component component : components) {
       component.teleopInit();
     }
+
   }
   
   @Override
