@@ -15,12 +15,7 @@ public class Arm implements Component{
   public Arm(){
     armMotor = new WPI_TalonSRX(Const.ArmMotor);
     armPoint = new SensorCollection(armMotor); 
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, Const.SFSPidIdx, Const.SFSTimeoutMS);
-    armMotor.config_kF(Const.FslotIdx, Const.FVofP, Const.FTimeout);
-    armMotor.config_kP(Const.PslotIdx, Const.PVofP, Const.PTimeout);
-    armMotor.config_kI(Const.IslotIdx, Const.IVofP, Const.ITimeout);
-    armMotor.config_kD(Const.DslotIdx, Const.DVofP, Const.DTimeout);
-    armMotor.configMaxIntegralAccumulator(Const.MIAslotdx, Const.MIAiaccum, Const.MIATimeout);
+    armMotor.configAllSettings(Const.armConfig);
     armMotor.setSensorPhase(true);
     armMotor.setInverted(true);
   }

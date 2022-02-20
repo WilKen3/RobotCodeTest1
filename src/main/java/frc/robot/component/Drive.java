@@ -1,10 +1,8 @@
 package frc.robot.component;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import frc.robot.State;
@@ -29,15 +27,10 @@ public class Drive implements Component {
     dRB.follow(dRF);
     dLB.follow(dLF);
     Ddrive = new DifferentialDrive(dLF, dRF);
-
    
-    dRF.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Const.SFSPidIdx, Const.SFSTimeoutMS);
-    dLF.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Const.SFSPidIdx, Const.SFSPidIdx);
-
-    
+    dRF.configAllSettings(Const.dRConfig);
+    dRF.configAllSettings(Const.dRConfig);
   }
-
-
 
   public void autonomousInit(){}
 
@@ -68,6 +61,5 @@ public class Drive implements Component {
 
     }
   }
-
 
 }

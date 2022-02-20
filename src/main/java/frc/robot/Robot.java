@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.component.*;
 import frc.robot.component.Component;
-
+import frc.robot.subClass.Const;
 import frc.robot.subClass.ExternalSensors;
 
 
@@ -19,6 +19,7 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotInit() {
+    Const.ConstInit();
     components = new ArrayList<>();
     components.add(new Drive());
     components.add(new Arm());

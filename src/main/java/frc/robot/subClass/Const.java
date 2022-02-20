@@ -1,5 +1,8 @@
 package frc.robot.subClass;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+
 public class Const {
     //Deadband
     public static final double Deadband = 0.2;
@@ -22,8 +25,6 @@ public class Const {
     public static final int ArmMotor = 3;
     public static final int shooterR = 4;
     public static final int shooterL = 5;
-
-    
 
     // intakemotor
     public static final double IntakeSpeed = -0.3;
@@ -50,43 +51,42 @@ public class Const {
     public static final double ArmFedForCoef = 0.05;
     public static final double ArmDown = 0.01;
 
-    // PDIF (V = value)
-    public static final int FslotIdx = 0;
-    public static final double FVofP = 0;
-    public static final int FTimeout = 30;
-
-    public static final int PslotIdx = 0;
-    public static final double PVofP = 6.125;
-    public static final int PTimeout = 30;
-
-    public static final int IslotIdx = 0;
-    public static final double IVofP = 0.005;
-    public static final int ITimeout = 30;
-
-    public static final int DslotIdx = 0;
-    public static final double DVofP = 250;
-    public static final int DTimeout = 30;
-
-    public static final int MIAslotdx = 0;
-    public static final double MIAiaccum = 30000;
-    public static final int MIATimeout = 30;
-
+ 
     // feedback sensor
     // 0 又は 1
-    public static final int SFSPidIdx = 0;
+    //public static final int SFSPidIdx = 0;
     public static final int ShooterInitialPosition = 0;
 
     
-    public static final int SFSTimeoutMS = 30;
+    
 
-    //PID for shooter
-    public static final double kPshooterL = 0.05;
-    public static final double kIshooterL = 0.0005;
-    public static final double kDshooterL = 0.5;
+    public static final TalonSRXConfiguration armConfig = new TalonSRXConfiguration();
+    public static final TalonSRXConfiguration shooterLConfig = new TalonSRXConfiguration();
+    public static final TalonSRXConfiguration shooterRConfig = new TalonSRXConfiguration();
+    public static final TalonSRXConfiguration dRConfig = new TalonSRXConfiguration();
+    public static final TalonSRXConfiguration dLConfig = new TalonSRXConfiguration();
 
-    public static final double kPshooterR = 0.05;
-    public static final double kIshooterR = 0.0005;
-    public static final double kDshooterR = 0.1;
+    public static void ConstInit(){
+        armConfig.slot0.kP = 6.125;
+        armConfig.slot0.kI = 0.005;
+        armConfig.slot0.kD = 250;
+        armConfig.slot0.kF = 0;
+        armConfig.slot0.maxIntegralAccumulator = 30000;
+        armConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.Analog;
+
+        shooterLConfig.slot0.kP = 0.05;
+        shooterLConfig.slot0.kI = 0.0005;
+        shooterLConfig.slot0.kD = 0.5;
+        shooterLConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
+
+        shooterRConfig.slot0.kP = 0.05;
+        shooterRConfig.slot0.kI = 0.0005;
+        shooterRConfig.slot0.kD = 0.1;
+        shooterRConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
+
+        dRConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
+        dLConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
+    }
 
 
 

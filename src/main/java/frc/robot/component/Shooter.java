@@ -23,22 +23,14 @@ public class Shooter implements Component {
     shooterL = new WPI_TalonSRX(Const.shooterL);
     shooterR = new WPI_TalonSRX(Const.shooterR);
     
-    //shooterLsensor = new SensorCollection(shooterL);
-    shooterL.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Const.SFSPidIdx, Const.SFSTimeoutMS);
+   
+    shooterL.configAllSettings(Const.shooterLConfig);
     shooterL.setSelectedSensorPosition(Const.ShooterInitialPosition);
-    shooterL.config_kP(Const.PslotIdx, Const.kPshooterL, Const.SFSTimeoutMS);
-    shooterL.config_kI(Const.IslotIdx, Const.kIshooterL, Const.SFSTimeoutMS);
-    shooterL.config_kD(Const.DslotIdx, Const.kDshooterL, Const.SFSTimeoutMS);
-    //shooterL.configMaxIntegralAccumulator(0, 30000,30);
-
-    // shooterRsensor = new SensorCollection(shooterR);
-    shooterR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Const.SFSPidIdx, Const.SFSTimeoutMS);
-    shooterR.setSelectedSensorPosition(Const.ShooterInitialPosition);
-    shooterR.config_kP(Const.PslotIdx, Const.kPshooterR, Const.SFSTimeoutMS);
-    shooterR.config_kI(Const.IslotIdx, Const.kIshooterR, Const.SFSTimeoutMS);
-    shooterR.config_kD(Const.DslotIdx, Const.kDshooterR, Const.SFSTimeoutMS);
-    //shooterR.configMaxIntegralAccumulator(0, 30000,30);
     
+
+    
+    shooterR.configAllSettings(Const.shooterRConfig);
+    shooterR.setSelectedSensorPosition(Const.ShooterInitialPosition);
 
     intakeMotor = new VictorSPX(Const.IntakeMotor);
 
