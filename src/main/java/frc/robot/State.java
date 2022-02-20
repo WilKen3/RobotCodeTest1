@@ -6,14 +6,18 @@ import frc.robot.subClass.Const;
 
 public class State {
     public static Modes mode;
+    //ステート
     public static ArmState armState;
     public static ShooterState shooterState;
     public static DriveState driveState;
+    //アームのアングル設定
     public static double armPidTargetAngle;
     public static double armAngle;
+    //センサー類：値の読み取り用
     public static double shooterLspeed, shooterRspeed;
     public static double dRFSpeed, dLFSpeed;
     public static double forSpeed, sideSpeed;
+    //アームの位置
     public static double ArmOutputUp, ArmOutputDown;
     
     
