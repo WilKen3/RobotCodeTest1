@@ -20,11 +20,13 @@ public class Const {
     public static final int DriveLeftBack = 13;
     
     public static final int IntakeMotor = 14;
-    public static final int IntakeBeltF = 0;
-    public static final int IntakeBeltB = 1;
+    public static final int IntakeSensorF = 0;
+    public static final int IntakeSensorB = 1;
     public static final int ArmMotor = 3;
     public static final int shooterR = 4;
     public static final int shooterL = 5;
+    public static final int IntakeBeltF = 11;
+    public static final int IntakeBeltB = 15;
 
     // intakemotor
     public static final double IntakeSpeed = -0.3;
@@ -51,15 +53,20 @@ public class Const {
     public static final double ArmFedForCoef = 0.05;
     public static final double ArmDown = 0.01;
 
+    public static final double PMaxOutput = 1;
+    public static final double NoOutput = 0;
+    public static final double MMaxOutput = -1;
+
+    public static final double ShooterSpeedL = -5000;
+    public static final double ShooterSpeedR = 5000;
  
     // feedback sensor
     // 0 又は 1
-    //public static final int SFSPidIdx = 0;
+    public static final int PrimaryClosedLoop = 0;
+    public static final int AuxiliaryClosedLoop = 1;
     public static final int ShooterInitialPosition = 0;
 
     
-    
-
     public static final TalonSRXConfiguration armConfig = new TalonSRXConfiguration();
     public static final TalonSRXConfiguration shooterLConfig = new TalonSRXConfiguration();
     public static final TalonSRXConfiguration shooterRConfig = new TalonSRXConfiguration();

@@ -34,10 +34,10 @@ public class Shooter implements Component {
 
     intakeMotor = new VictorSPX(Const.IntakeMotor);
 
-    intakeF = new VictorSPX(11);
-    intakeB = new VictorSPX(15);
-    ballSensorF = new DigitalInput(Const.IntakeBeltF);
-    ballSensorB = new DigitalInput(Const.IntakeBeltB);
+    intakeF = new VictorSPX(Const.IntakeBeltF);
+    intakeB = new VictorSPX(Const.IntakeBeltB);
+    ballSensorF = new DigitalInput(Const.IntakeSensorF);
+    ballSensorB = new DigitalInput(Const.IntakeSensorB);
   }
   
   public void autonomousInit(){}
@@ -76,39 +76,39 @@ public class Shooter implements Component {
 }
 
   public double getVelocityR(){
-    return(shooterR.getSelectedSensorVelocity(0));
+    return(shooterR.getSelectedSensorVelocity(Const.PrimaryClosedLoop));
   }
   
   public double getVelocityL(){
-    return(shooterL.getSelectedSensorVelocity(0));
+    return(shooterL.getSelectedSensorVelocity(Const.PrimaryClosedLoop));
   }
 
   public void shoot(){
-    shooterL.set(ControlMode.Velocity, -5000);
-    shooterR.set(ControlMode.Velocity, 5000);
+    shooterL.set(ControlMode.Velocity, Const.ShooterSpeedL);
+    shooterR.set(ControlMode.Velocity, Const.ShooterSpeedR);
     
     intakeMotor.set(ControlMode.PercentOutput, Const.IntakeNeutral);
 
-    intakeB.set(ControlMode.PercentOutput, 1);
-    intakeF.set(ControlMode.PercentOutput, 1);
+    intakeB.set(ControlMode.PercentOutput, Const.PMaxOutput);
+    intakeF.set(ControlMode.PercentOutput, Const.PMaxOutput);
   }
 
   public void intake(){
-    boolean SF = ballSensorF.get();
-    boolean SB = ballSensorB.get();
+    boolean SensorFront = ballSensorF.get();
+    boolean SensorBack = ballSensorB.get();
 
     shooterL.set(ControlMode.PercentOutput, -Const.IntakeSpeed);
     shooterR.set(ControlMode.PercentOutput, Const.IntakeSpeed);
 
     intakeMotor.set(ControlMode.PercentOutput, Const.IntakeSpeed);  
 
-    intakeF.set(ControlMode.PercentOutput, -1);
-        if(!SB){
-          intakeB.set(ControlMode.PercentOutput, 0);
-        } else if(!SF) {
-          intakeB.set(ControlMode.PercentOutput, -1);
+    intakeF.set(ControlMode.PercentOutput, Const.MMaxOutput);
+        if(!SensorBack){
+          intakeB.set(ControlMode.PercentOutput, Const.NoOutput);
+        } else if(!SensorFront) {
+          intakeB.set(ControlMode.PercentOutput, Const.MMaxOutput);
         } else {
-          intakeB.set(ControlMode.PercentOutput, 0);
+          intakeB.set(ControlMode.PercentOutput, Const.NoOutput);
         }
 
   }
@@ -119,8 +119,8 @@ public class Shooter implements Component {
 
     intakeMotor.set(ControlMode.PercentOutput, Const.OuttakeSpeed);
 
-    intakeB.set(ControlMode.PercentOutput, 1);
-    intakeF.set(ControlMode.PercentOutput, 1);
+    intakeB.set(ControlMode.PercentOutput, Const.PMaxOutput);
+    intakeF.set(ControlMode.PercentOutput, Const.PMaxOutput);
   }
   
   public void neutral(){
