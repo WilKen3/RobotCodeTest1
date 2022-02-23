@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public abstract class Mode {
   XboxController driveController, operateController;
-  public void addController(XboxController driveController, XboxController operatController) {
+  public void addController(XboxController driveController, XboxController operateController) {
     this.driveController = driveController;
-    this.operateController = operatController;
+    this.operateController = operateController;
   }
   abstract public void changeMode();
   abstract public void changeState();
