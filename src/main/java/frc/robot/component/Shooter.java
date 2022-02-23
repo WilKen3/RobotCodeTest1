@@ -1,33 +1,28 @@
 package frc.robot.component;
 
-
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
-
-
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
+
 import frc.robot.subClass.Const;
 import frc.robot.State;
-
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Shooter implements Component {
   
   private WPI_TalonSRX shooterL, shooterR;
   private VictorSPX intakeMotor, intakeF, intakeB;
   private DigitalInput ballSensorF, ballSensorB;
-  //private SensorCollection shooterLsensor, shooterRsensor;
+  
 
   public Shooter(){
     shooterL = new WPI_TalonSRX(Const.shooterL);
     shooterR = new WPI_TalonSRX(Const.shooterR);
     
     shooterL.configAllSettings(Const.shooterLConfig);
-    shooterL.setSelectedSensorPosition(Const.ShooterInitialPosition);
-      
+    // shooterL.setSelectedSensorPosition(Const.ShooterInitialPosition);
     shooterR.configAllSettings(Const.shooterRConfig);
-    shooterR.setSelectedSensorPosition(Const.ShooterInitialPosition);
+    // shooterR.setSelectedSensorPosition(Const.ShooterInitialPosition);
 
     intakeMotor = new VictorSPX(Const.IntakeMotor);
 
@@ -68,8 +63,6 @@ public class Shooter implements Component {
         shoot();
         break;
     }
-
-  
 }
 
   public double getVelocityR(){

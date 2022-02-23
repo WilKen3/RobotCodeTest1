@@ -2,7 +2,6 @@ package frc.robot.component;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-
 import frc.robot.State;
 import frc.robot.subClass.*;
 import com.ctre.phoenix.motorcontrol.*;
